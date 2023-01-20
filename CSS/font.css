@@ -1,0 +1,113 @@
+/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+    font-family: 'iconfont';
+    /* Project id 3655600 */
+    src        :
+        url('//at.alicdn.com/t/c/font_3655600_r9v7xsvvn3.woff2?t=1664193822693') format('woff2'),
+        url('//at.alicdn.com/t/c/font_3655600_r9v7xsvvn3.woff?t=1664193822693') format('woff'),
+        url('//at.alicdn.com/t/c/font_3655600_r9v7xsvvn3.ttf?t=1664193822693') format('truetype');
+}
+
+.iconfont {
+    font-family            : "iconfont" !important;
+    font-size              : 16px;
+    font-style             : normal;
+    -webkit-font-smoothing : antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-susushutiao:before {
+    content: "\e658";
+}
+
+.icon-susutiantong:before {
+    content: "\e65d";
+}
+
+.icon-susubaomihua:before {
+    content: "\e660";
+}
+
+.icon-susumakalong:before {
+    content: "\e662";
+}
+
+.icon-susuhuafubing:before {
+    content: "\e68f";
+}
+
+.icon-susutongluoshao:before {
+    content: "\e69d";
+}
+
+.icon-susuxiaoxiongruantang-46:before {
+    content: "\e60e";
+}
+
+.icon-susuxiaoxiongruantang-47:before {
+    content: "\e60f";
+}
+
+.icon-susuxiaoxiongruantang-44:before {
+    content: "\e610";
+}
+
+.icon-susuxiaoxiongruantang-45:before {
+    content: "\e613";
+}
+
+.icon-susushiwutubiao-49:before {
+    content: "\e616";
+}
+
+.icon-susushiwutubiao00-70:before {
+    content: "\e618";
+}
+
+.icon-susushiwutubiao00-74:before {
+    content: "\e619";
+}
+
+.icon-susushiwutubiao00-72:before {
+    content: "\e61a";
+}
+
+.icon-susua-2-53:before {
+    content: "\e611";
+}
+
+.icon-susua-2-57:before {
+    content: "\e612";
+}
+
+.icon-susua-2-61:before {
+    content: "\e614";
+}
+
+.icon-susunailao:before {
+    content: "\e65b";
+}
+
+.icon-susukele:before {
+    content: "\e65c";
+}
+
+.icon-susuhanbao:before {
+    content: "\e65e";
+}
+
+.icon-susupaofu-53:before {
+    content: "\e617";
+}
+
+.icon-susubingsha:before {
+    content: "\e698";
+}
+
+.icon-sususuannai:before {
+    content: "\e699";
+}
+
+.icon-susushiwutubiao00-66:before {
+    content: "\e61c";
+}
