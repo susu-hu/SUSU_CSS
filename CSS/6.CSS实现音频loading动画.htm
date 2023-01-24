@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS实现音频loading动画</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    /* 定义全局变量，音频的高度 */
+    :root {
+      --h: 80px;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      position: relative;
+      height: var(--h);
+    }
+    .container span {
+      width: 4px;
+      height: 20%;
+      border-radius: calc(var(--h) * 0.2 * 0.5);
+      margin-right: 4px;
+      background: linear-gradient(to top, #d299c2 0%, #fef9d7 100%);
+      /* 添加动画效果 */
+      animation: loading 2s infinite linear;
+      /* 添加动画延迟，实现此起彼伏的效果 */
+      animation-delay: calc(0.2s * var(--d));
+    }
+    .container span:last-child {
+      margin-right: 0;
+      /* 最后一个标签不需要右边距 */
+    }
+    @keyframes loading {
+      0% {
+        height: 20%;
+        border-radius: calc(var(--h) * 0.2 * 0.5);
+        background: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+      }
+      50% {
+        height: 100%;
+        border-radius: calc(var(--h) * 1 * 0.5);
+        background: linear-gradient(to top, #d2d2d2 0%, #fef9d7 100%);
+      }
+      100% {
+        height: 20%;
+        border-radius: calc(var(--h) * 0.2 * 0.5);
+        background: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+      }
+    }
+  </style>
+  <body>
+    <div class="container">
+      <!-- 添加15个音频标签 定义css变量，表示延迟时间,一共是15个标签，中间位置为8，所以设置
+    第八个位置延迟为0-->
+      <span style="--d: 7"></span>
+      <span style="--d: 6"></span>
+      <span style="--d: 5"></span>
+      <span style="--d: 4"></span>
+      <span style="--d: 3"></span>
+      <span style="--d: 2"></span>
+      <span style="--d: 1"></span>
+      <span style="--d: 0"></span>
+      <span style="--d: 1"></span>
+      <span style="--d: 2"></span>
+      <span style="--d: 3"></span>
+      <span style="--d: 4"></span>
+      <span style="--d: 5"></span>
+      <span style="--d: 6"></span>
+      <span style="--d: 7"></span>
+    </div>
+  </body>
+</html>
