@@ -31,6 +31,8 @@ https://gitee.com/susuhhhhhh/SUSU_CSS.git
 
 6.CSS实现音频loading动画
 
+7.CSS实现卡片边框渐变动画
+
 ##### SVG
 
 1.SVG实现拟物态圆环进度条
