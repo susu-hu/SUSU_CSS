@@ -33,6 +33,8 @@ https://gitee.com/susuhhhhhh/SUSU_CSS.git
 
 7.CSS实现卡片边框渐变动画
 
+8.CSS实现3D魔方
+
 ##### SVG
 
 1.SVG实现拟物态圆环进度条
