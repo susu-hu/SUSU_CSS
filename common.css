@@ -21,3 +21,10 @@ body {
 }
 
 /* 设置水平垂直居中 */
+
+input {
+    background    : none;
+    border        : none;
+    outline       : none;
+    vertical-align: middle;
+}
