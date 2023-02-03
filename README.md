@@ -41,9 +41,17 @@ https://gitee.com/susuhhhhhh/SUSU_CSS.git
 
 8.CSS实现3D魔方
 
+9.css实现input搜索框展开动画1
+
+10.css实现input搜索框展开动画2
+
+11.css实现input搜索框展开动画3
+
 ##### SVG
 
 1.SVG实现拟物态圆环进度条
+
+2.SVG实现水球进度条
 
 #### 参与贡献
 
