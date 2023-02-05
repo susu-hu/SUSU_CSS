@@ -28,3 +28,8 @@ input {
     outline       : none;
     vertical-align: middle;
 }
+
+/* 防止未加载完成显示undefined */
+[v-cloak] {
+    display: none;
+}
