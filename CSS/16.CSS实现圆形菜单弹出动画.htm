@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>16.CSS实现圆形菜单弹出动画</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <link rel="stylesheet" href="../font.css" />
+  <body>
+    <section>
+      <div class="container">
+        <li style="--n: 0">
+          <span class="iconfont icon">&#xe658;</span>
+        </li>
+        <li style="--n: 1">
+          <span class="iconfont icon">&#xe611;</span>
+        </li>
+        <li style="--n: 2">
+          <span class="iconfont icon">&#xe617;</span>
+        </li>
+        <li style="--n: 3">
+          <span class="iconfont icon">&#xe69d;</span>
+        </li>
+        <li style="--n: 4">
+          <span class="iconfont icon">&#xe65d;</span>
+        </li>
+        <li style="--n: 5">
+          <span class="iconfont icon">&#xe65e;</span>
+        </li>
+        <li style="--n: 6">
+          <span class="iconfont icon">&#xe698;</span>
+        </li>
+        <li style="--n: 7">
+          <span class="iconfont icon">&#xe65c;</span>
+        </li>
+        <div class="box-active" style="--n: 0"></div>
+      </div>
+      <div class="box">
+        <span class="iconfont icon">&#xe662;</span>
+      </div>
+    </section>
+  </body>
+  <style>
+    section {
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+
+    .container {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      opacity: 0;
+      transform: scale(0);
+      visibility: hidden;
+      transition: all 0.5s;
+    }
+
+    /*filter（滤镜）修饰父元素背景，影响子元素问题解决 */
+    .container::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: #bd9d62;
+      border-radius: 50%;
+      filter: drop-shadow(0px 0px 8px orange);
+      -webkit-filter: drop-shadow(0px 0px 8px orange);
+    }
+
+    .container.active {
+      transform: scale(1);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .icon {
+      font-size: 28px;
+      transition: all 0.5s;
+    }
+
+    .box {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.5s;
+      position: absolute;
+      top: calc(100px - 30px);
+      left: calc(100px - 30px);
+      background: #222;
+    }
+
+    .box span {
+      transform: scale(1.5);
+    }
+
+    .box.active span {
+      transform: rotate(135deg);
+    }
+
+    li {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      top: calc(100px - 20px);
+      left: calc(100px - 20px);
+      transition: all 0.5s;
+      transform: rotate(calc(45deg * var(--n))) translateX(-70px);
+    }
+
+    .box-active {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: orange;
+      box-shadow: 0 0 0 5px #222;
+      border-radius: 50%;
+      pointer-events: none;
+      transition: all 0.5s;
+      transform-origin: center;
+      top: calc(100px - 25px);
+      left: calc(100px - 25px);
+      z-index: 1;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    li.active {
+      transform: rotate(calc(45deg * var(--n))) translateX(-95px);
+    }
+
+    li span {
+      transform: rotate(calc(-45deg * var(--n)));
+      transition: all 0.5s;
+    }
+
+    li.active span {
+      animation: scale 1s ease-in-out;
+    }
+
+    li.active ~ .box-active {
+      transform: rotate(calc(45deg * var(--n))) translateX(-95px);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @keyframes scale {
+      100% {
+        transform: scale(1.9);
+      }
+    }
+  </style>
+  <script>
+    let m = document.querySelector(".box"),
+      c = document.querySelector(".container"),
+      ls = document.querySelectorAll("li"),
+      node = document.getElementsByClassName("box-active")[0];
+    m.onclick = function () {
+      c.classList.toggle("active");
+      m.classList.toggle("active");
+      ls.forEach((item) => {
+        item.classList.remove("active");
+      });
+    };
+    const clickActive = function () {
+      ls.forEach((item) => {
+        item.classList.remove("active");
+      });
+      this.classList.add("active");
+      node.style.setProperty("--n", this.style.getPropertyValue("--n").trim());
+    };
+    ls.forEach((item) => {
+      item.addEventListener("click", clickActive);
+    });
+  </script>
+</html>
