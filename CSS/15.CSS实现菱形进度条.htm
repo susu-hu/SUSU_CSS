@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>15.CSS实现菱形进度条</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --bg: #222;
+    }
+
+    .progress {
+      width: 350px;
+      height: 30px;
+      background: linear-gradient(to right, transparent 10px, var(--bg) 0) 0 0/20px,
+        linear-gradient(to right, orange, orange) 0 0 / var(--per) no-repeat
+          #eee;
+      transform: skewX(-30deg);
+    }
+    span {
+      padding-left: 20px;
+      font-size: 30px;
+      font-weight: bold;
+    }
+  </style>
+
+  <body>
+    <div class="progress" style="--per: 50%" id="box"></div>
+    <span id="span"></span>
+  </body>
+  <script>
+    const getData = () => {
+      const box = document.getElementById("box");
+      const span = document.getElementById("span");
+      // 获取当前CSS变量
+      let curPer = getComputedStyle(box).getPropertyValue("--per");
+      let i = 0;
+      let timer = null;
+      const loading = () => {
+        if (i < 100) {
+          i++;
+          // 设置CSS变量
+          box.style.setProperty("--per", i + "%");
+          span.innerHTML = i + "%";
+        } else {
+          i = 0;
+          clearInterval(timer);
+          setTimeout(() => {
+            span.innerHTML = "0%";
+            // 设置CSS变量
+            box.style.setProperty("--per", "0%");
+            timer = setInterval(loading, 100);
+          }, 2000);
+        }
+      };
+      loading();
+      timer = setInterval(loading, 100);
+    };
+    // 执行
+    getData();
+  </script>
+</html>
