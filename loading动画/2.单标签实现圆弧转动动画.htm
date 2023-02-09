@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.圆弧转动动画</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      /* 定义全局变量 圆弧的宽度 */
+      --w: 200px;
+    }
+    div {
+      width: var(--w);
+      height: var(--w);
+      /* 圆角 */
+      border-radius: 50%;
+      /* 设置内阴影 */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) inset;
+      /* 设置相对定位 */
+      position: relative;
+    }
+    /* 添加伪元素 */
+    div::before {
+      content: "";
+      /* 宽高为父元素一致 */
+      width: 100%;
+      height: 100%;
+      /* 同样设置为圆角 */
+      border-radius: 50%;
+      /* 设置绝对定位 left 为0 top为0 */
+      position: absolute;
+      left: 0;
+      top: 0;
+      /* 添加内阴影 */
+      box-shadow: 0 4px 0 #f2a115 inset;
+      /* 添加旋转动画 */
+      animation: rotate 2s infinite linear;
+    }
+    /* 定义旋转动画 */
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        /* 1turn 即为360deg */
+        transform: rotate(1turn);
+      }
+    }
+  </style>
+  <body>
+    <div></div>
+  </body>
+</html>
