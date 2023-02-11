@@ -17,23 +17,23 @@
       background: #55557f;
       cursor: pointer;
       border-radius: 10px;
+      /* 添加过渡效果 */
+      transition: all 0.5s;
     }
     div::after,
     div::before {
       content: "";
       position: absolute;
       border: 2px solid #55557f;
-      /* top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px; */
+      width: 240px;
+      height: 84px;
+      border-radius: 10px;
       /* 简写为 */
       inset: -10px;
-      border-radius: 10px;
       /* 添加动画 */
-      animation: clippath 3s infinite linear;
+      animation: pathRotate 3s infinite linear;
     }
-    @keyframes clippath {
+    @keyframes pathRotate {
       0%,
       100% {
         clip-path: inset(0 0 98% 0);
