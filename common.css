@@ -33,3 +33,10 @@ input {
 [v-cloak] {
     display: none;
 }
+
+/* 去掉button默认样式 */
+button {
+    border    : none;
+    background: transparent;
+    outline   : none;
+}
