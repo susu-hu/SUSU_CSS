@@ -57,6 +57,8 @@ https://gitee.com/susuhhhhhh/SUSU_CSS.git
 
 1.3D环形饼图
 
+##### loading合集
+
 #### 参与贡献
 
 1.  Fork 本仓库
