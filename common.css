@@ -40,3 +40,19 @@ button {
     background: transparent;
     outline   : none;
 }
+
+.flex-column {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+}
+
+.flex-row {
+    display       : flex;
+    flex-direction: row;
+    align-items   : center;
+}
+
+.j_c {
+    justify-content: center;
+}
