@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="divport" content="width=device-width, initial-scale=1.0" />
+    <title>24.CSS实现卡券2</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --c1: #ffe2e2;
+      --c2: #bbded6;
+    }
+    .coupon-box {
+      display: flex;
+      align-items: flex-start;
+      color: #333;
+      width: 550px;
+      height: 180px;
+      border-radius: 20px;
+      overflow: hidden;
+      /* 180px+ 370px =550px */
+      background: radial-gradient(
+            circle at right top,
+            transparent 18px,
+            var(--c1) 0
+          )
+          top left / 180px 51% no-repeat,
+        radial-gradient(circle at right bottom, transparent 18px, var(--c1) 0)
+          bottom left / 180px 51% no-repeat,
+        radial-gradient(circle at left top, transparent 18px, var(--c2) 0) top
+          right / 370px 51% no-repeat,
+        radial-gradient(circle at left bottom, transparent 18px, var(--c2) 0)
+          bottom right / 370px 51% no-repeat;
+      /* 添加fliter阴影 */
+      filter: drop-shadow(2px 2px 1px rgba(255, 255, 255, 0.3));
+    }
+    /* 添加虚线 */
+    .coupon-box::after {
+      content: "";
+      /* 144px= 180 - 2 * 18px */
+      height: 144px;
+      width: 2px;
+      background-image: linear-gradient(0deg, #fff 50%, transparent 50%);
+      background-size: 10px 10px;
+      position: absolute;
+      left: 179px;
+      top: calc(50% - 144px / 2);
+    }
+    .cou-banner {
+      min-width: 130px;
+      height: 45px;
+      line-height: 45px;
+      text-align: center;
+      padding: 0 10px;
+      font-size: 20px;
+      color: red;
+      background: rgba(255, 165, 0, 0.2);
+      border-radius: 20px 0 20px 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .cou-left {
+      width: 180px;
+      height: 100%;
+      font-size: 20px;
+      color: red;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cou-left span:nth-child(1) {
+      font-size: 45px;
+    }
+    .cou-right {
+      width: calc(550px - 180px);
+      height: 100%;
+      padding: 20px 20px 20px 35px;
+      font-size: 23px;
+      font-weight: bold;
+      line-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cou-right-time {
+      color: red;
+    }
+  </style>
+  <body>
+    <div class="coupon-box">
+      <div class="cou-banner">一键三连</div>
+      <div class="cou-left">
+        <div>
+          <span>8888</span>
+          <span>元</span>
+        </div>
+      </div>
+      <div class="cou-right">
+        <div>
+          <p>苏苏_icon,这是一张卡券</p>
+          <p class="cou-right-time">剩余 23:59:59</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
