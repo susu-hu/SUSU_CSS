@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="divport" content="width=device-width, initial-scale=1.0" />
+    <title>25.CSS实现卡券3</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <link rel="stylesheet" href="../font.css" />
+  <style>
+    :root {
+      --c: #ff2e63;
+    }
+    .coupon {
+      width: 600px;
+      height: 180px;
+      position: relative;
+      /* 添加投影 */
+      filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.2));
+      display: flex;
+    }
+    .coupon::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+      -webkit-mask: radial-gradient(
+          circle at 20px 20px,
+          transparent 20px,
+          red 0
+        ) -20px -20px;
+      background: #f5e8e8;
+    }
+    .coupon::after {
+      content: "";
+      width: 220px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: linear-gradient(45deg, var(--c), pink);
+      -webkit-mask: radial-gradient(
+          circle at 20px 20px,
+          transparent 20px,
+          red 0
+        )-20px -20px;
+    }
+    .inner-line {
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      right: 4px;
+      top: calc(50% - 45%);
+      border: 2px solid var(--c);
+      border-radius: 8px;
+    }
+    .coupon-left {
+      width: 220px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 1;
+      position: relative;
+    }
+    .iconfont {
+      font-size: 100px;
+      position: absolute;
+      z-index: -1;
+      right: 0;
+      bottom: 10px;
+      transform: rotate(25deg);
+      opacity: 0.3;
+    }
+    .coupon-left-text {
+      font-size: 60px;
+      display: flex;
+      align-items: baseline;
+      font-weight: bold;
+    }
+    .coupon-left-text span:nth-child(1) {
+      font-size: 30px;
+      margin-right: 10px;
+    }
+    .coupon-left-ban {
+      margin-top: 10px;
+      min-width: 120px;
+      display: inline-block;
+      text-align: center;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 30px;
+      background: rgba(234, 211, 149, 0.46);
+    }
+    .coupon-right {
+      /* flex:1 表示占据剩余宽度 */
+      flex: 1;
+      color: rgb(185, 125, 46);
+      padding: 0 20px 0 50px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      line-height: 35px;
+      font-size: 20px;
+    }
+  </style>
+  <body>
+    <div class="coupon">
+      <span class="inner-line"></span>
+      <div class="coupon-left">
+        <!-- 添加阿里巴巴矢量图标 -->
+        <span class="iconfont">&#xe613;</span>
+        <div class="coupon-left-text">
+          <span>￥</span>
+          <span>99.9</span>
+        </div>
+        <div class="coupon-left-ban">一键三连</div>
+      </div>
+      <div class="coupon-right">
+        <ul>
+          <li>1024粉丝已到您的账户！</li>
+          <li>大家希望更新哪些内容呢！</li>
+          <li>评论区戳戳，向我留言吧！</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
