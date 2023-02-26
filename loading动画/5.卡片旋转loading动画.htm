@@ -9,86 +9,66 @@
   <link rel="stylesheet" href="../common.css" />
   <style>
     :root {
-      --c1: orange;
-      --c2: pink;
-      --c3: red;
-      --c4: #000;
+      --c1: #d8784b;
+      --c2: #f8dfe3;
+      --c3: #afcbe4;
+      --c4: #c9afe3;
     }
     .loader {
-      position: absolute;
-      top: calc(50% - 75px);
-      left: calc(50% - 50px);
-      width: 100px;
-      height: 150px;
+      position: relative;
+      width: 90px;
+      height: 180px;
       transform: perspective(1000px) rotateY(-45deg);
       /*动画 视距 Y轴旋转*/
       transform-style: preserve-3d; /*保留3D效果*/
     }
+    /* 底部阴影 */
     .loader::before {
       content: "";
+      width: 100%;
+      height: 50px;
       position: absolute;
       bottom: -70px;
       left: 0;
-      width: 100%;
-      height: 50px;
-      background-color: #000;
+      background: #000;
       filter: blur(40px);
-      opacity: 0.5;
       transform: rotateX(90deg);
     }
-    .loader .s {
+    .loader .loader-box {
+      width: 100%;
+      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
       transform-style: preserve-3d;
       animation: rotate 5s linear infinite;
-      /*动画名称 5S 时间 重复循环*/
     }
-    .loader .s .s1 {
+    .loader .loader-box .loader-box-item {
       position: absolute;
       top: 0;
       left: 0;
-      display: block;
       width: 100%;
       height: 100%;
-      border-radius: 10px; /*圆角*/
+      border-radius: 10px;
+      background: var(--c);
+      transform: rotateX(var(--r));
     }
-    .loader .s .s1:nth-child(1) {
-      /*第一个*/
-      transform: rotateX(0deg);
-      background: rgb(110, 46, 39);
-    }
-    .loader .s .s1:nth-child(2) {
-      transform: rotateX(45deg);
-      background: #ccd49d;
-    }
-    .loader .s .s1:nth-child(3) {
-      transform: rotateX(-45deg);
-      background: #71bbbb;
-    }
-
-    .loader .s .s1:nth-child(4) {
-      transform: rotateX(90deg);
-      background: #afaae9;
-    }
-    /* @keyframes rotate {
+    @keyframes rotate {
       0% {
-        transform: perspective(1000px) rotateX(0deg);loader
+        transform: perspective(1000px) rotateX(0deg);
       }
       100% {
         transform: perspective(1000px) rotateX(1turn);
       }
-    } */
+    }
   </style>
   <body>
     <div class="loader">
-      <div class="s">
-        <div class="s1"></div>
-        <div class="s1"></div>
-        <div class="s1"></div>
-        <div class="s1"></div>
+      <div class="loader-box">
+        <div class="loader-box-item" style="--c: var(--c1); --r: 0deg"></div>
+        <div class="loader-box-item" style="--c: var(--c2); --r: 45deg"></div>
+        <div class="loader-box-item" style="--c: var(--c3); --r: 90deg"></div>
+        <div class="loader-box-item" style="--c: var(--c4); --r: 135deg"></div>
       </div>
     </div>
   </body>
