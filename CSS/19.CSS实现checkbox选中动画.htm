@@ -59,6 +59,28 @@
       transform: rotate(-45deg);
       transition: all 0.5s ease-in-out;
     }
+    /* 设置label的样式 */
+    label {
+      cursor: pointer;
+      text-decoration-line: underline;
+      /* 设置底部线条颜色为透明色 */
+      text-decoration-color: transparent;
+      text-underline-offset: 1px;
+      /* 添加过渡效果 */
+      transition: all 0.5s;
+    }
+    /* label添加hover事件 */
+    label:hover {
+      text-decoration-color: var(--checked);
+      text-underline-offset: 10px;
+      color: var(--checked);
+    }
+    /* 设置checkbox被选中之后label的样式 */
+    input[type="checkbox"]:checked ~ label {
+      color: var(--checked);
+      text-underline-offset: -5px;
+      text-decoration-color: var(--checked);
+    }
   </style>
   <body>
     <div class="container">
