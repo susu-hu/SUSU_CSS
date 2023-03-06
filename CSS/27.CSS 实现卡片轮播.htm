@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>27.CSS 实现卡片轮播</title>
+</head>
+<link rel="stylesheet" href="../common.css" />
+<style>
+  section {
+    width: 250px;
+    height: 350px;
+    perspective: 800px;
+  }
+
+  .card-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: translateZ(-200px) rotateY(0);
+    animation: rotate 10s infinite cubic-bezier(1, 0.015, 0.295, 1.225) forwards;
+  }
+
+  .card-box-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    transform: rotateY(var(--y)) translateZ(200px);
+    background: var(--url);
+  }
+
+  /* url没办法直接插入css变量 */
+
+  @keyframes rotate {
+
+    0%,
+    20% {
+      transform: translateZ(-200px) rotateY(0);
+    }
+
+    25%,
+    45% {
+      transform: translateZ(-200px) rotateY(-120deg);
+    }
+
+    50%,
+    75% {
+      transform: translateZ(-200px) rotateY(-240deg);
+    }
+
+    80%,
+    100% {
+      transform: translateZ(-200px) rotateY(-360deg);
+    }
+  }
+</style>
+
+<body>
+  <section>
+    <div class="card-box">
+      <div class="card-box-item" style="
+          --y: 0deg;
+          --url: url('/img/jyj1.jpg') no-repeat center/100%;
+        "></div>
+      <div class="card-box-item" style="
+          --y: 120deg;
+          --url: url('/img/jyj2.jpg') no-repeat center/100%;
+        "></div>
+      <div class="card-box-item" style="
+          --y: 240deg;
+          --url: url('/img/jyj3.jpg') no-repeat center/100%;
+        "></div>
+    </div>
+  </section>
+</body>
+
+</html>
