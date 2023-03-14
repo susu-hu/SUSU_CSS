@@ -60,10 +60,9 @@
   </div>
 </body>
 <script type="text/javascript">
-  var dom = document.getElementById("chart");
-  var myChart = echarts.init(dom);
-  var option;
-  var app = {};
+  const dom = document.getElementById("chart");
+  const myChart = echarts.init(dom);
+  let option;
   // 生成扇形的曲面参数方程
   function getParametricEquation(
     startRatio,
