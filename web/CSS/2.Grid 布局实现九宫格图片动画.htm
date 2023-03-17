@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.Grid 布局实现九宫格图片动画</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    /* 定义全局变量 */
+    :root {
+      /* 每个宫格对应的宽高 */
+      --w: 80px;
+      /* 每个宫格之间的间距 上下左右 */
+      --gap: 10px;
+    }
+    /* 外层容器 */
+    .container {
+      width: calc(var(--w) * 3 + var(--gap) * 2);
+      height: calc(var(--w) * 3 + var(--gap) * 2);
+      /* grid布局 */
+      display: grid;
+      grid-template-columns: repeat(3, var(--w));
+      grid-template-rows: repeat(3, var(--w));
+      /* 设置gap均匀分布 */
+      gap: var(--gap);
+      /* hover 过渡效果太生硬，添加transition过渡效果 */
+      transition: all 0.5s;
+      /* 设置九宫格水平垂直居中 */
+      place-content: center;
+    }
+    .item {
+      width: var(--w);
+      height: var(--w);
+      border: 1px solid;
+      /* 添加背景图片 */
+      background-image: url(https://i.postimg.cc/GhXrMDN0/card.jpg);
+      /* 设置背景size 宽高为当前每个宫格的三倍 */
+      background-size: calc(var(--w) * 3) calc(var(--w) * 3);
+      /* 设置边框渐变色 */
+      border-image: linear-gradient(45deg, #293a53, #7cb1c5) 1;
+      /* 设置背景的position */
+      /* 合并x，y方向的位置 */
+      background-position: calc(var(--x) * 100%) calc(var(--y) * 100%);
+    }
+    /* 为父容器添加hover事件 */
+    .container:hover {
+      /* 添加投影 */
+      filter: drop-shadow(0 0 20px #000);
+      /* gap设置为0 */
+      gap: 0;
+    }
+    /* 当父容器hover，取消宫格的border */
+    .container:hover .item {
+      border: none;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <!-- 9个宫格 ,设置css变量，x表示x方向的偏移，y表示y方向的偏移-->
+      <div class="item" style="--x: 0; --y: 0"></div>
+      <div class="item" style="--x: -1; --y: 0"></div>
+      <div class="item" style="--x: -2; --y: 0"></div>
+      <div class="item" style="--x: 0; --y: -1"></div>
+      <div class="item" style="--x: -1; --y: -1"></div>
+      <div class="item" style="--x: -2; --y: -1"></div>
+      <div class="item" style="--x: 0; --y: -2"></div>
+      <div class="item" style="--x: -1; --y: -2"></div>
+      <div class="item" style="--x: -2; --y: -2"></div>
+    </div>
+  </body>
+</html>

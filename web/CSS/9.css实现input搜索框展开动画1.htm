@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css实现input搜索框展开动画1</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    .input-box {
+      position: relative;
+    }
+    .input {
+      width: 160px;
+      height: 38px;
+      font-size: 14px;
+      padding: 0 40px 0 20px;
+      border: 1px solid #eee;
+      border-radius: 40px;
+      transition: width 0.5s;
+      transition-delay: 0.1s;
+    }
+    .input-box span {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      color: #969696;
+      text-align: center;
+      background: #222;
+      border-radius: 50%;
+      font-size: 15px;
+      cursor: pointer;
+      position: absolute;
+      top: 4px;
+      right: 5px;
+    }
+    /* 添加input 的focus事件 */
+    .input:focus {
+      width: 280px;
+      outline: none;
+      box-shadow: none;
+      transition-delay: 0;
+    }
+    .input:focus + span {
+      background: pink;
+      color: #fff;
+    }
+  </style>
+  <body>
+    <div class="input-box">
+      <input type="text" class="input" />
+      <span>搜</span>
+    </div>
+  </body>
+</html>

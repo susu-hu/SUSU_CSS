@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>28.CSS实现3D柱形</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      /* 柱形下部分颜色+柱形底部菱形 */
+      --bar-bg: rgb(255, 0, 0);
+      /* 柱形上部分颜色 */
+      --bar-shape: rgba(255, 165, 0, 0.9);
+      /* 柱形顶部菱形颜色 */
+      --bar-top: rgb(255, 165, 0);
+      /* 柱形线条颜色 */
+      --bar-line: rgba(0, 0, 0, 0.1);
+      /* clip-path裁剪菱形 */
+      --path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      /* 柱形宽度 */
+      --w: 25px;
+      /* 柱形高度最大值 */
+      --h: 300px;
+    }
+    section {
+      /* flex布局 */
+      display: flex;
+      align-items: baseline;
+      height: var(--h);
+    }
+    .bar {
+      position: relative;
+      width: var(--w);
+      height: var(--height);
+      margin-right: 20px;
+      background: linear-gradient(to top, var(--bar-bg), var(--bar-shape));
+    }
+    .bar:last-child {
+      margin-right: 0;
+    }
+    /* bar添加前后伪元素，设置为clip-path裁剪后的菱形 */
+    .bar::before,
+    .bar::after {
+      content: "";
+      position: absolute;
+      width: var(--w);
+      height: calc(var(--w) / 2);
+      clip-path: var(--path);
+      left: 0;
+    }
+    .bar::before {
+      background: var(--bar-top);
+      top: 0;
+      /* 层级置于最上层 */
+      z-index: 2;
+      transform: translateY(-50%);
+    }
+    .bar::after {
+      background: var(--bar-bg);
+      bottom: 0;
+      z-index: 1;
+      transform: translateY(50%);
+    }
+    .bar span {
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      background: var(--bar-line);
+      left: 50%;
+      top: 0;
+    }
+  </style>
+  <body>
+    <section>
+      <div class="bar" style="--height: 20%">
+        <span></span>
+      </div>
+      <div class="bar" style="--height: 30%">
+        <span></span>
+      </div>
+      <div class="bar" style="--height: 70%">
+        <span></span>
+      </div>
+      <div class="bar" style="--height: 100%">
+        <span></span>
+      </div>
+      <div class="bar" style="--height: 50%">
+        <span></span>
+      </div>
+      <div class="bar" style="--height: 60%">
+        <span></span>
+      </div>
+      <div class="bar" style="--height: 80%">
+        <span></span>
+      </div>
+      <div class="bar" style="--height: 90%">
+        <span></span>
+      </div>
+      <div class="bar" style="--height: 10%">
+        <span></span>
+      </div>
+      <div class="bar" style="--height: 3%">
+        <span></span>
+      </div>
+    </section>
+  </body>
+</html>

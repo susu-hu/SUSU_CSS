@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 实现鼠标hover 展示内容</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <link rel="stylesheet" href="../font.css" />
+  <style>
+    .box {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      /* 设置overflow */
+      overflow: hidden;
+    }
+    .box img {
+      width: 100%;
+      height: 100%;
+      /* 添加过渡效果 */
+      transition: all 0.4s ease;
+    }
+    .box::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      /* 添加过渡效果 */
+      transition: all 0.4s ease;
+    }
+    /* 图片添加hover效果 */
+    .box:hover img {
+      opacity: 0.8;
+      filter: brightness(1.5);
+    }
+    /* box添加hover事件 */
+    .box:hover::before {
+      height: 70%;
+      border-radius: 0 0 150px 150px;
+      box-shadow: 0 0 20px #000;
+      opacity: 1;
+    }
+    .box .box-content {
+      width: 100%;
+      padding: 0 30px;
+      color: #333;
+      text-align: center;
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      opacity: 0;
+      /* 添加过渡效果 */
+      transition: all 0.4s ease;
+    }
+    /*box-content 文本区域添加hover效果  */
+    .box:hover .box-content {
+      opacity: 1;
+    }
+    .box-content p:nth-child(1) {
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 8px;
+      /* 定义无小写字母，仅有大写字母 */
+      text-transform: uppercase;
+      margin: 0 0 2px;
+    }
+    .box-content p:nth-child(2) {
+      font-size: 16px;
+      /* 文本中的每个单词以为=大写字母开头 */
+      text-transform: capitalize;
+    }
+    .box .box-icon {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .box-icon .icon-item {
+      margin: 0 2px;
+      background: rgba(255, 255, 255, 0.5);
+      width: 35px;
+      height: 35px;
+      text-align: center;
+      line-height: 31px;
+      border: 2px solid #fff;
+      cursor: pointer;
+      /* 添加过渡效果 */
+      transition: all 0.4s ease;
+    }
+    .box-icon .icon-item:nth-child(1) {
+      transform: translateX(-200px);
+    }
+    .box-icon .icon-item:nth-child(2) {
+      transform: translateX(200px);
+    }
+    /* icon的hover事件 */
+    .box-icon .icon-item:hover {
+      background: #fff;
+      border-radius: 50%;
+    }
+    /* box hover的时候 显示按钮 */
+    .box:hover .icon-item {
+      transform: translate(0);
+    }
+  </style>
+  <body>
+    <div class="box">
+      <img src="https://i.postimg.cc/GhXrMDN0/card.jpg" alt="图片" />
+      <div class="box-content">
+        <p>苏苏小苏苏</p>
+        <p>web 前端</p>
+      </div>
+      <!-- 底部图标 -->
+      <div class="box-icon">
+        <div class="icon-item">
+          <span class="iconfont">&#xe698;</span>
+        </div>
+        <div class="icon-item">
+          <span class="iconfont">&#xe65c;</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

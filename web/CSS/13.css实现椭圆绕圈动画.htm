@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>13.css实现椭圆绕圈动画</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <body>
+    <div class="ball">
+      <div class="circle-line1"></div>
+      <div class="circle-line2"></div>
+      <div class="circle-line3"></div>
+    </div>
+  </body>
+  <style>
+    body {
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    }
+
+    .i-b,
+    .ball {
+      display: inline-block;
+    }
+
+    .p-3d,
+    .ball,
+    .line,
+    .circle-line1,
+    .circle-line2,
+    .circle-line3 {
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+    }
+
+    .ball {
+      width: 200px;
+      height: 200px;
+      margin: 0;
+      border-radius: 50%;
+      position: relative;
+      background: #e6be74;
+      perspective: 1200px;
+      perspective-origin: 50% 50%;
+    }
+
+    .ball:before {
+      content: "";
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: -40px 10px 70px 10px rgba(0, 0, 0, 0.5) inset;
+      z-index: 2;
+    }
+
+    .ball:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+        circle at 50% 50%,
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.1) 40%,
+        rgba(0, 0, 0, 0) 50%
+      );
+      -webkit-transform: translateX(64px) rotateX(90deg) translateZ(-113px)
+        rotateY(-30deg);
+      -moz-transform: translateX(64px) rotateX(90deg) translateZ(-113px)
+        rotateY(-30deg);
+      -ms-transform: translateX(64px) rotateX(90deg) translateZ(-113px)
+        rotateY(-30deg);
+      -o-transform: translateX(64px) rotateX(90deg) translateZ(-113px)
+        rotateY(-30deg);
+      transform: translateX(64px) rotateX(90deg) translateZ(-113px)
+        rotateY(-30deg);
+      z-index: -1;
+    }
+
+    .line,
+    .circle-line1,
+    .circle-line2,
+    .circle-line3 {
+      border-radius: 50%;
+      position: absolute;
+      border: 3px solid #5c5c6d;
+      transform: rotateZ(60deg) rotateY(105deg);
+      -webkit-transform: rotateZ(60deg) rotateY(105deg);
+    }
+
+    .dot-center,
+    .circle-line1::before,
+    .circle-line1::after,
+    .circle-line2::before,
+    .circle-line2::after,
+    .circle-line3::before,
+    .circle-line3::after {
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+
+    .circle-line1 {
+      width: 400px;
+      height: 400px;
+      left: 50%;
+      top: 50%;
+      margin-left: -200px;
+      margin-top: -200px;
+    }
+
+    .circle-line1::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #d87093;
+      filter: drop-shadow(10px 10px 10px #d87093);
+      animation: move 20s linear infinite;
+      transform: rotateZ(0deg) translateX(200px) rotateZ(0deg) rotateY(-105deg);
+    }
+
+    @keyframes move {
+      from {
+        transform: rotateZ(0deg) translateX(200px) rotateZ(0deg)
+          rotateY(-105deg);
+      }
+
+      to {
+        transform: rotateZ(360deg) translateX(200px) rotateZ(-360deg)
+          rotateY(-105deg);
+      }
+    }
+
+    .circle-line1::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #ad4eda;
+      filter: drop-shadow(10px 10px 10px #ad4eda);
+      animation: move4 20s linear infinite;
+      transform: rotateZ(180deg) translateX(200px) rotateZ(-180deg)
+        rotateY(-105deg);
+    }
+
+    @keyframes move4 {
+      from {
+        transform: rotateZ(-180deg) translateX(200px) rotateZ(180deg)
+          rotateY(-105deg);
+      }
+
+      to {
+        transform: rotateZ(180deg) translateX(200px) rotateZ(-180deg)
+          rotateY(-105deg);
+      }
+    }
+
+    .circle-line2 {
+      width: 500px;
+      height: 500px;
+      left: 50%;
+      top: 50%;
+      margin-left: -250px;
+      margin-top: -250px;
+    }
+
+    .circle-line2::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #87ceeb;
+      filter: drop-shadow(10px 10px 10px #87ceeb);
+      animation: move2 20s linear infinite;
+    }
+
+    @keyframes move2 {
+      from {
+        transform: rotateZ(0deg) translateX(250px) rotateZ(0deg)
+          rotateY(-105deg);
+      }
+
+      to {
+        transform: rotateZ(360deg) translateX(250px) rotateZ(-360deg)
+          rotateY(-105deg);
+      }
+    }
+
+    .circle-line2::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #48dbbb;
+      filter: drop-shadow(10px 10px 10px #48dbbb);
+      animation: move5 20s linear infinite;
+    }
+
+    @keyframes move5 {
+      from {
+        transform: rotateZ(-180deg) translateX(250px) rotateZ(180deg)
+          rotateY(-105deg);
+      }
+
+      to {
+        transform: rotateZ(180deg) translateX(250px) rotateZ(-180deg)
+          rotateY(-105deg);
+      }
+    }
+
+    .circle-line3 {
+      width: 320px;
+      height: 320px;
+      left: 50%;
+      top: 50%;
+      margin-left: -160px;
+      margin-top: -160px;
+    }
+
+    .circle-line3::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #e44818;
+      filter: drop-shadow(10px 10px 10px #e44818);
+      animation: move3 20s linear infinite;
+    }
+
+    @keyframes move3 {
+      from {
+        transform: rotateZ(0deg) translateX(160px) rotateZ(0deg)
+          rotateY(-105deg);
+      }
+
+      to {
+        transform: rotateZ(360deg) translateX(160px) rotateZ(-360deg)
+          rotateY(-105deg);
+      }
+    }
+
+    .circle-line3::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #4396ce;
+      filter: drop-shadow(10px 10px 10px #4396ce);
+      animation: move6 20s linear infinite;
+    }
+
+    @keyframes move6 {
+      from {
+        transform: rotateZ(-180deg) translateX(160px) rotateZ(180deg)
+          rotateY(-105deg);
+      }
+
+      to {
+        transform: rotateZ(180deg) translateX(160px) rotateZ(-180deg)
+          rotateY(-105deg);
+      }
+    }
+  </style>
+</html>

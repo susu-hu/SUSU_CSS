@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.CSS 实现跳动的方块动画</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    /* 定义全局变量，正方形的宽高为w */
+    :root {
+      --w: 30px;
+    }
+    .container {
+      width: calc(var(--w) * 5);
+      height: calc(var(--w) * 5);
+      padding: var(--w);
+      border-radius: calc(var(--w) / 2);
+      display: flex;
+      flex-wrap: wrap;
+      box-shadow: 0 12px 20px 6px rgba(104, 112, 118, 0.2);
+      transform-style: preserve-3d;
+      transform: rotateX(45deg) rotatez(45deg);
+    }
+    .square {
+      width: var(--w);
+      height: var(--w);
+      background: rgba(207, 52, 40);
+      position: relative;
+      transform-style: preserve-3d;
+      /* z轴方向的偏移，偏移量为w */
+      transform: translateZ(var(--w));
+      /* 添加box-shadow阴影 */
+      box-shadow: calc(var(--w) * 3) calc(var(--w) * 3) 15px rgba(0, 0, 0, 0.2);
+      /* 添加动画 */
+      animation: beating 1s infinite;
+      /* 设置动画延迟 */
+      animation-delay: calc(0.05s * var(--d));
+    }
+    @keyframes beating {
+      50% {
+        transform: translateZ(calc(var(--w) / 2));
+      }
+    }
+    .square::before {
+      content: "";
+      position: absolute;
+      width: var(--w);
+      height: var(--w);
+      left: 0;
+      top: 0;
+      background: rgb(56, 35, 35);
+      transform: rotateY(-90deg);
+      transform-origin: right center;
+    }
+    .square::after {
+      content: "";
+      position: absolute;
+      width: var(--w);
+      height: var(--w);
+      left: 0;
+      top: 0;
+      background: rgb(80, 39, 36);
+      transform: rotateX(90deg);
+      transform-origin: right bottom;
+    }
+    /* 添加hover效果 */
+    .square:hover {
+      cursor: pointer;
+      filter: brightness(2.1);
+    }
+  </style>
+  <body>
+    <div class="container">
+      <!-- 九个正方形 ,添加css变量-->
+      <div class="square" style="--d: 1"></div>
+      <div class="square" style="--d: 2"></div>
+      <div class="square" style="--d: 3"></div>
+      <div class="square" style="--d: 4"></div>
+      <div class="square" style="--d: 5"></div>
+      <div class="square" style="--d: 6"></div>
+      <div class="square" style="--d: 7"></div>
+      <div class="square" style="--d: 8"></div>
+      <div class="square" style="--d: 9"></div>
+    </div>
+  </body>
+</html>

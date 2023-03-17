@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>26.CSS实现卡券4</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --c1: orange;
+      --c2: #ff2e63;
+      --c3: #fff;
+    }
+    .coupon {
+      width: 550px;
+      height: 180px;
+      position: relative;
+      border: 20px;
+      /* drop-shadow 投影 */
+      filter: drop-shadow(4px 4px 0 rgba(226, 216, 216, 0.1));
+      display: flex;
+    }
+    .coupon::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+      background: linear-gradient(45deg, var(--c1), var(--c2));
+      /* 添加mask遮罩 */
+      /* mask遮罩：通过在特定点屏蔽或裁剪图像来隐藏元素（部分或者全部） */
+      -webkit-mask: radial-gradient(circle at 50%, red 5px, #0000 0) 50% 50% /
+          100% 20px,
+        radial-gradient(circle at 20px 20px, #0000 20px, red 0) -20px -20px /
+          50%;
+      /* mask-composite:表示在当前遮罩及其下方的遮罩层的合成操作 */
+      /* 通俗说法：当一个元素存在多重mask的时候，我们就可以运用mask-composite进行效果叠加 */
+      /* destination-out：只显示下方遮罩，重合的地方不显示 */
+      -webkit-mask-composite: destination-out;
+    }
+    .coupon-left,
+    .coupon-right {
+      width: 50%;
+      padding: 20px;
+      font-size: 15px;
+    }
+    .coupon-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 38px;
+      color: #f5e5db;
+    }
+    .coupon-left span:nth-child(1) {
+      font-weight: bold;
+      font-size: 20px;
+      position: relative;
+    }
+    .coupon-left span:nth-child(1)::after,
+    .coupon-left span:nth-child(1)::before {
+      content: "";
+      position: absolute;
+      width: 40px;
+      height: 4px;
+      background: linear-gradient(-250deg, transparent 0%, var(--c3) 100%);
+      top: calc(50% - 2px);
+    }
+    .coupon-left span:nth-child(1)::after {
+      right: -90%;
+      transform: rotate(180deg);
+    }
+    .coupon-left span:nth-child(1)::before {
+      left: -90%;
+    }
+    .coupon-left span:nth-child(2) {
+      font-weight: bold;
+      font-size: 19px;
+      letter-spacing: 3px;
+    }
+    .coupon-left span:nth-child(3) {
+      margin-top: 5px;
+      min-width: 130px;
+      display: inline-block;
+      text-align: center;
+      height: 35px;
+      line-height: 35px;
+      border-radius: 35px;
+      background: #fff;
+      cursor: pointer;
+      color: var(--c2);
+      letter-spacing: 3px;
+    }
+    .coupon-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .coupon-right-text {
+      font-size: 80px;
+      font-weight: bold;
+      display: flex;
+      align-items: baseline;
+    }
+    .coupon-right-text span:nth-child(1) {
+      font-size: 40px;
+      margin-right: 5px;
+    }
+  </style>
+  <body>
+    <div class="coupon">
+      <div class="coupon-left">
+        <span>优惠券</span>
+        <span>满100000元使用</span>
+        <span>点击领取</span>
+      </div>
+      <div class="coupon-right">
+        <div class="coupon-right-text">
+          <span>￥</span>
+          <span>9999</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

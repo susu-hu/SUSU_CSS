@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>18.clip-path实现水波纹文字</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      /* 定义文字颜色 */
+      --c: #00ffff;
+    }
+    div {
+      font-size: 120px;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--c);
+      letter-spacing: 15px;
+      position: relative;
+    }
+    /* 添加伪元素 */
+    div::before {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--c);
+      /* 添加波浪动画 */
+      animation: wave 4s ease-in-out infinite;
+    }
+    /*  波浪动画 */
+    @keyframes wave {
+      0%,
+      100% {
+        clip-path: polygon(
+          0 100%,
+          0 61%,
+          16% 77%,
+          29% 86%,
+          44% 90%,
+          62% 88%,
+          78% 81%,
+          89% 74%,
+          100% 62%,
+          100% 100%
+        );
+      }
+      50% {
+        clip-path: polygon(
+          0 100%,
+          0 25%,
+          16% 52%,
+          29% 65%,
+          43% 75%,
+          64% 76%,
+          77% 72%,
+          88% 62%,
+          100% 49%,
+          100% 100%
+        );
+      }
+    }
+  </style>
+  <body>
+    <div data-text="苏苏">苏苏</div>
+  </body>
+</html>

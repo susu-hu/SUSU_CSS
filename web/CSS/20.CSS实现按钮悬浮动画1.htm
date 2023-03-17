@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS实现按钮悬浮动画1</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    button {
+      width: 280px;
+      height: 90px;
+      padding: 10px;
+      font-size: 24px;
+      letter-spacing: 5px;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: inset 2px 2px 16px 0 rgba(135, 206, 235, 0.8),
+        7px 7px 20px 0 rgba(0, 0, 0, 0.8);
+      border-radius: 5px;
+      /* 相对定位 */
+      position: relative;
+      /* 添加过渡效果 */
+      transition: all 0.5s;
+    }
+    button::after {
+      content: "";
+      position: absolute;
+      /* 初始宽度设置为0，当鼠标悬浮设置宽度为100% */
+      width: 0;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-radius: 5px;
+      box-shadow: -7px -7px 20px 0 #fff9, -4px -4px 5px 0 #fff9,
+        7px 7px 20px 0 rgba(0, 0, 0, 0.5);
+      /* 添加过渡效果 */
+      transition: all 0.5s;
+    }
+    button:hover {
+      color: skyblue;
+      font-size: 26px;
+    }
+    button:hover::after {
+      width: 100%;
+      right: 0;
+      left: auto;
+    }
+    /* 按钮激活状态样式 */
+    button:active {
+      top: -2px;
+    }
+  </style>
+  <body>
+    <button>苏苏_icon</button>
+  </body>
+</html>

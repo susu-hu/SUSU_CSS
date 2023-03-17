@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS实现3d魔方</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      /* 魔方整体背景色 */
+      --bg: #000;
+      /* 魔方六面的颜色 */
+      --c1: #f5e7a1;
+      --c2: skyblue;
+      --c3: #fff;
+      --c4: #97d497;
+      --c5: #801a1a;
+      --c6: orange;
+      /* 魔方小块的宽高 */
+      --w: 30px;
+      /* 魔方小块之间的间距 */
+      --gap: 8px;
+      /* 魔方整个的宽高 */
+      --allW: calc(3 * var(--w) + 4 * var(--gap));
+    }
+    .container {
+      width: var(--allW);
+      height: var(--allW);
+      /* 保留3d效果 */
+      transform-style: preserve-3d;
+      /* 三维透视效果 */
+      perspective: 900px;
+    }
+    .container-box {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      /* 保留3d效果 */
+      transform-style: preserve-3d;
+      /* 添加旋转动画 */
+      animation: rotate 5s infinite alternate;
+    }
+    @keyframes rotate {
+      0% {
+        transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+      }
+      15% {
+        transform: rotateZ(45deg) rotateX(45deg) rotateY(45deg);
+      }
+      30% {
+        transform: rotateZ(45deg) rotateX(90deg) rotateY(90deg);
+      }
+      45% {
+        transform: rotateZ(45deg) rotateX(135deg) rotateY(135deg);
+      }
+      60% {
+        transform: rotateZ(45deg) rotateX(90deg) rotateY(180deg);
+      }
+      75% {
+        transform: rotateZ(45deg) rotateX(45deg) rotateY(225deg);
+      }
+      100% {
+        transform: rotateZ(45deg) rotateX(0deg) rotateY(270deg);
+      }
+    }
+    .cube-side {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background: var(--bg);
+      border-radius: 7px;
+      padding: var(--gap);
+      /* 背面元素是否可见 */
+      backface-visibility: hidden;
+    }
+    .cube-grid {
+      width: var(--w);
+      height: var(--w);
+      border-radius: calc(var(--w) / 5);
+      /* 定义color色值 */
+      color: var(--c);
+      /*  currentColor取决于当前color的色值*/
+      background: currentColor;
+      /* 添加box-shadow,展示剩余宫格 */
+      box-shadow: calc(var(--w) + var(--gap)) 0 0 currentColor,
+        calc(var(--w) * 2 + var(--gap) * 2) 0 currentColor,
+        0 calc(var(--w) + var(--gap)) currentColor,
+        calc(var(--w) + var(--gap)) calc(var(--w) + var(--gap)) currentColor,
+        calc(var(--w) * 2 + var(--gap) * 2) calc(var(--w) + var(--gap))
+          currentColor,
+        0 calc(var(--w) * 2 + var(--gap) * 2) currentColor,
+        calc(var(--w) + var(--gap)) calc(var(--w) * 2 + var(--gap) * 2)
+          currentColor,
+        calc(var(--w) * 2 + var(--gap) * 2) calc(var(--w) * 2 + var(--gap) * 2)
+          currentColor;
+    }
+    .side-back {
+      transform: rotateX(-180deg) translateZ(calc(var(--allW) / 2));
+    }
+    .side-right {
+      transform: rotateY(90deg) translateZ(calc(var(--allW) / 2));
+    }
+    .side-left {
+      transform: rotateY(-90deg) translateZ(calc(var(--allW) / 2));
+    }
+    .side-top {
+      transform: rotateX(90deg) translateZ(calc(var(--allW) / 2));
+    }
+    .side-bottom {
+      transform: rotateX(-90deg) translateZ(calc(var(--allW) / 2));
+    }
+    .side-front {
+      transform: translateZ(calc(var(--allW) / 2));
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="container-box">
+        <!-- 第一面 -->
+        <div class="cube-side side-front">
+          <!-- 定义css变量 -->
+          <div class="cube-grid" style="--c: var(--c1)"></div>
+        </div>
+        <!-- 添加第二面 -->
+        <div class="cube-side side-back">
+          <div class="cube-grid" style="--c: var(--c2)"></div>
+        </div>
+        <!-- 第三面 -->
+        <div class="cube-side side-right">
+          <div class="cube-grid" style="--c: var(--c3)"></div>
+        </div>
+        <!-- 第四面 -->
+        <div class="cube-side side-left">
+          <div class="cube-grid" style="--c: var(--c4)"></div>
+        </div>
+        <!-- 第五面 -->
+        <div class="cube-side side-top">
+          <div class="cube-grid" style="--c: var(--c5)"></div>
+        </div>
+        <!-- 第六面 -->
+        <div class="cube-side side-bottom">
+          <div class="cube-grid" style="--c: var(--c6)"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

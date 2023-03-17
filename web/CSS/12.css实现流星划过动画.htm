@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css实现流星划过动画</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <style>
+    .container {
+      width: 350px;
+      height: 260px;
+      position: relative;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+      /* 溢出隐藏 */
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: url(https://i.postimg.cc/L52SHxFx/earth.jpg) no-repeat;
+      background-size: cover;
+      /* 背景图片添加动画 */
+      animation: ping 4s infinite linear alternate-reverse;
+    }
+    @keyframes ping {
+      100% {
+        background-position: 100%;
+      }
+    }
+
+    .line-box {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .line-item {
+      width: var(--w);
+      height: var(--h);
+      position: absolute;
+      background: linear-gradient(0deg, var(--c1) 0%, var(--c2) 100%);
+      top: 0;
+      left: calc(var(--l) + 70px);
+      right: calc(var(--r) - 70px);
+      transform: rotate(45deg);
+      /* 初始显示为0 */
+      opacity: 0;
+      /* 添加划过动画 */
+      animation: shank 2s linear infinite;
+      /* 添加动画延迟 */
+      animation-delay: calc(var(--d) * 0.2s);
+    }
+    .line-item::after {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--c1);
+      filter: blur(1.8px);
+      box-shadow: 0 -1px -1px 5px var(--c2);
+      bottom: -4px;
+      left: 50%;
+      transform: translate(-50%);
+    }
+    @keyframes shank {
+      0% {
+        transform: rotate(45deg) translateY(-100px) scale(0.5);
+        opacity: 0;
+      }
+      70% {
+        transform: rotate(45deg) translateY(100px) scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: rotate(45deg) translateY(220px) scale(0.5);
+        opacity: 0;
+      }
+    }
+  </style>
+
+  <body>
+    <div class="container" id="app" v-cloak>
+      <div class="line-box">
+        <span
+          class="line-item"
+          v-for="(item,index) in lineList"
+          :key="index"
+          :style="{
+            '--c1':item.c1,
+            '--c2':item.c2,
+            '--w':item.w,
+            '--h':item.h,
+            '--l':item.l,
+            '--d':item.d,
+            '--r':item.r
+          }"
+        ></span>
+      </div>
+    </div>
+  </body>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        // 流星线条列表
+        lineList: [
+          {
+            // 颜色1
+            c1: "#69E4F6",
+            // 颜色2
+            c2: "#69e4f600",
+            // 宽度
+            w: "2px",
+            // 高度
+            h: "33px",
+            // left距离
+            l: "0px",
+            // 动画延迟时间
+            d: 3,
+          },
+          {
+            c1: "#FED258",
+            c2: "rgba(254,210,88,0)",
+            w: "2px",
+            h: "23px",
+            l: "60px",
+            d: 5,
+          },
+          {
+            c1: "#FED258",
+            c2: "rgba(254,210,88,0)",
+            w: "2px",
+            h: "30px",
+            // right距离
+            r: "72px",
+            d: 2,
+          },
+          {
+            c1: "#69E4F6",
+            c2: "#69e4f600",
+            w: "2px",
+            h: "33px",
+            r: "30px",
+            d: 0,
+          },
+          {
+            c1: "#69E4F6",
+            c2: "#69e4f600",
+            w: "2px",
+            h: "25px",
+            r: "41px",
+            d: 1,
+          },
+          {
+            c1: "#69E4F6",
+            c2: "#69e4f600",
+            w: "2px",
+            h: "24px",
+            l: "105px",
+            d: 4,
+          },
+          {
+            c1: "#FED258",
+            c2: "rgba(254,210,88,0)",
+            w: "2px",
+            h: "24px",
+            l: "30px",
+            d: 2,
+          },
+          {
+            c1: "#FED258",
+            c2: "rgba(254,210,88,0)",
+            w: "2px",
+            h: "30px",
+            r: "111px",
+            d: 5,
+          },
+          {
+            c1: "#69E4F6",
+            c2: "#69e4f600",
+            w: "2px",
+            h: "28px",
+            r: "2px",
+            d: 3,
+          },
+        ],
+      },
+    });
+  </script>
+</html>

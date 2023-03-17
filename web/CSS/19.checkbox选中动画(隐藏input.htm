@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS实现checkbox选中动画</title>
+    <link rel="stylesheet" href="../common.css" />
+  </head>
+  <style>
+    :root {
+      --checked: orange;
+    }
+    .container {
+      min-width: 280px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+    .item {
+      margin-bottom: 20px;
+      font-size: 15px;
+      letter-spacing: 5px;
+    }
+    /* 最后一个元素底边距为0 */
+    .item:last-child {
+      margin-bottom: 0;
+    }
+    /* 方案二，设置设置透明度为0，在可以点击的基础上，新写一个标签替代 */
+    input[type="checkbox"] {
+      /* 设置 display: none之后 无法继续点击*/
+      /* display: none; */
+      /* 设置透明度为0，可以继续点击  */
+      /* opacity: 0; */
+      /* 或者设置visibility:hidden 无法继续点击*/
+      visibility: hidden;
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      /* 位于最上方 */
+      z-index: 1;
+    }
+    .item span {
+      width: 25px;
+      height: 25px;
+      position: relative;
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .item span::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      border: 2px solid #fff;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 50%;
+    }
+    /* 设置checkbox点击之后的样式 */
+    input[type="checkbox"]:checked + span::after {
+      height: 15px;
+      width: 25px;
+      border-top: none;
+      border-right: none;
+      border-radius: 0;
+      transform: rotate(-45deg);
+      transition: all 0.5s ease-in-out;
+    }
+    /* 设置label的样式 */
+    label {
+      cursor: pointer;
+      text-decoration-line: underline;
+      /* 设置底部线条颜色为透明色 */
+      text-decoration-color: transparent;
+      text-underline-offset: 1px;
+      /* 添加过渡效果 */
+      transition: all 0.5s;
+    }
+    /* label添加hover事件 */
+    label:hover {
+      text-decoration-color: var(--checked);
+      text-underline-offset: 10px;
+      color: var(--checked);
+    }
+    /* 设置checkbox被选中之后label的样式 */
+    input[type="checkbox"]:checked ~ label {
+      color: var(--checked);
+      text-underline-offset: -5px;
+      text-decoration-color: var(--checked);
+      /* 删除线条 */
+      /* text-decoration: line-through; */
+      /* 线条宽度 */
+      /* text-decoration-thickness: 2px; */
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="item">
+        <input type="checkbox" id="option1" />
+        <span></span>
+        <label for="option1">学习</label>
+      </div>
+      <div class="item">
+        <input type="checkbox" id="option2" />
+        <span></span>
+        <label for="option2">更新视频</label>
+      </div>
+      <div class="item">
+        <input type="checkbox" id="option3" />
+        <span></span>
+        <label for="option3">看狂飙</label>
+      </div>
+      <div class="item">
+        <input type="checkbox" id="option4" />
+        <span></span>
+        <label for="option4">吃火锅</label>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>17.clip-path实现按钮流动边框</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    div {
+      position: relative;
+      width: 220px;
+      height: 64px;
+      line-height: 64px;
+      text-align: center;
+      color: #fff;
+      font-size: 20px;
+      background: #55557f;
+      cursor: pointer;
+      border-radius: 10px;
+      /* 添加过渡效果 */
+      transition: all 0.5s;
+    }
+    div::after,
+    div::before {
+      content: "";
+      position: absolute;
+      border: 2px solid #55557f;
+      width: 240px;
+      height: 84px;
+      border-radius: 10px;
+      /* 简写为 */
+      inset: -10px;
+      /* 添加动画 */
+      animation: pathRotate 3s infinite linear;
+    }
+    @keyframes pathRotate {
+      0%,
+      100% {
+        clip-path: inset(0 0 98% 0);
+      }
+      25% {
+        clip-path: inset(0 98% 0 0);
+      }
+      50% {
+        clip-path: inset(98% 0 0 0);
+      }
+      75% {
+        clip-path: inset(0 0 0 98%);
+      }
+    }
+    div::after {
+      animation-delay: -1.5s;
+    }
+    div:hover {
+      filter: brightness(1.5);
+    }
+  </style>
+  <body>
+    <div>苏苏_icon</div>
+  </body>
+</html>

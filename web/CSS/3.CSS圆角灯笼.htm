@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.CSS圆角灯笼</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    /* 定义全局变量 */
+    :root {
+      /* 灯笼线条颜色 */
+      --lineColor: #ecaa2f;
+      /* 灯笼背景颜色 */
+      --bg: #f00;
+    }
+    /* 定义父容器的宽高 */
+    .contaier {
+      width: 200px;
+      height: 150px;
+      position: relative;
+      /* 添加旋转动画 */
+      animation: rotate 3s infinite ease-in-out;
+    }
+    .center {
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      /* 设置圆角 */
+      border-radius: 120px;
+      /* 设置阴影 */
+      box-shadow: 0 0 80px -10px var(--bg);
+      position: relative;
+      /* 添加旋转动画 */
+      animation: rotate 3s infinite ease-in-out;
+      /* 旋转浮动太大，设置transform-origin */
+      transform-origin: top center;
+    }
+    .center-line {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    /* 添加前伪元素，后伪元素 */
+    .center-line::before,
+    .center-line::after {
+      content: "";
+      position: absolute;
+      /* 合并相同代码 */
+      height: 100%;
+      border: 2px solid var(--lineColor);
+      border-radius: 50%;
+      /* 距离顶部距离为0 */
+      top: 0;
+    }
+    .center-line::before {
+      width: 150px;
+      /* 水平居中 */
+      left: calc(50% - 75px);
+    }
+    .center-line::after {
+      width: 70px;
+      /* 水平居中 */
+      left: calc(50% - 35px);
+    }
+    .center-line span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      /* 水平垂直居中 */
+      transform: translate(-50%, -50%);
+      width: 18px;
+      font-size: 18px;
+      color: var(--lineColor);
+      font-weight: bold;
+    }
+
+    /* 为center添加前后伪元素 */
+    .center::before {
+      border-radius: 5px 5px 0 0;
+      /* 距离顶部-8px，稍微小于高度一点 */
+      top: -8px;
+    }
+    .center::after {
+      border-radius: 0 0 5px 5px;
+      bottom: -8px;
+    }
+    /* 合并代码 */
+    .center::before,
+    .center::after {
+      content: "";
+      position: absolute;
+      width: 80px;
+      height: 10px;
+      background: var(--lineColor);
+      /* 水平居中 */
+      left: calc(50% - 40px);
+    }
+
+    .head-line {
+      position: absolute;
+      width: 4px;
+      /* 高度自行调整，合适即可 */
+      height: 60px;
+      background: var(--lineColor);
+      /* 水平居中 */
+      left: calc(50% - 2px);
+      top: -60px;
+    }
+    .footer-line {
+      position: absolute;
+      width: 4px;
+      height: 50px;
+      background: var(--lineColor);
+      /* 水平居中 */
+      left: calc(50% - 2px);
+      bottom: -50px;
+      /* 添加旋转动画 */
+      animation: rotate 3s infinite ease-in-out;
+    }
+    /* footer-line添加前伪元素 */
+    .footer-line::before {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 80px;
+      background: linear-gradient(
+        var(--bg),
+        #e36d00 3px,
+        #fbd342 5px,
+        #e36d00 8px,
+        #e36d00 12px,
+        var(--bg) 16px,
+        rgba(255, 0, 0, 0.8) 26px,
+        rgba(255, 0, 0, 0.6)
+      );
+      border-radius: 5px 5px 0 0;
+      /* 水平居中 */
+      left: calc(50% - 8px);
+      bottom: -75px;
+    }
+    /* 添加动画 */
+    @keyframes rotate {
+      0%,
+      100% {
+        transform: rotate(-10deg);
+      }
+      50% {
+        transform: rotate(10deg);
+      }
+    }
+  </style>
+  <body>
+    <div class="contaier">
+      <!-- 添加顶部线条 -->
+      <div class="head-line"></div>
+      <!-- 中间灯笼区域 ，顶部内容旋转幅度太大，将其放入到center标签下-->
+      <div class="center">
+        <div class="center-line">
+          <span>兔年大吉</span>
+        </div>
+        <!-- 底部内容 -->
+        <div class="footer-line"></div>
+      </div>
+    </div>
+  </body>
+</html>

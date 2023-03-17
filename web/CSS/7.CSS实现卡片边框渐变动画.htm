@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS实现卡片边框渐变动画</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    /* 引入字体 */
+    @import url("https://fonts.googleapis.com/css?family=Amatic+SC");
+    body {
+      /* 添加透视效果 */
+      transform-style: preserve-3d;
+      perspective: 1800px;
+    }
+    .card {
+      width: 300px;
+      height: 200px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px 20px rgba(0, 0, 0, 0.17);
+      /* 修改角度为--rotate */
+      background: linear-gradient(var(--rotate), #ff1d74, #e3820c 43%, #c28846);
+      /* 添加旋转动画 */
+      animation: bg 2.5s infinite linear, rotate 1s infinite alternate-reverse;
+      position: relative;
+      transform: rotateX(10deg) rotateY(15deg);
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 296px;
+      height: 196px;
+      left: calc(50% - 148px);
+      top: calc(50% - 98px);
+      background: #222;
+      border-radius: 15px;
+    }
+    .card span {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      z-index: 1;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 26px;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 2px;
+      font-family: "Amatic SC";
+      cursor: default;
+      /* 添加过渡效果 */
+      transition: all 0.5s;
+    }
+    /* span添加hover */
+    .card:hover span {
+      background: linear-gradient(45deg, #ff1d74, #e3820c 43%, #c28846);
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+    /* 定义@property */
+    @property --rotate {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
+    @keyframes bg {
+      0% {
+        --rotate: 0deg;
+      }
+      100% {
+        --rotate: 360deg;
+      }
+    }
+    @keyframes rotate {
+      0% {
+        transform: rotateX(10deg) rotateY(15deg);
+      }
+      100% {
+        transform: rotateX(-10deg) rotateY(-15deg);
+      }
+    }
+  </style>
+  <body>
+    <div class="card">
+      <span>苏苏就是小苏苏888</span>
+    </div>
+  </body>
+</html>

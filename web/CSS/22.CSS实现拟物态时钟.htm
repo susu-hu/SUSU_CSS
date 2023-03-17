@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>22.CSS实现拟物态时钟</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      /* 页面背景色 */
+      --bg: #343956;
+      /* 秒针背景色、中间圆点背景色 */
+      --primary: #dd245b;
+      /* 分针背景色 */
+      --minutes-color: #9baacf;
+      /* 时针背景色 */
+      --hours-color: #bec8e4;
+    }
+    body {
+      background: var(--bg);
+    }
+    .box {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(225deg, #2f334d, #383d5c);
+      box-shadow: -25px 25px 45px #282c42, 25px -25px 45px #40466a;
+    }
+    .box .inner {
+      width: 180px;
+      height: 180px;
+      position: absolute;
+      /* inset:10px等同于left，bottom，top，right都为10px */
+      inset: 10px;
+      border-radius: 50%;
+      box-shadow: inset 10px 10px 20px rgba(35, 39, 60, 0.7),
+        inset -10px -10px 20px rgba(35, 39, 60, 0.7);
+    }
+    .box .inner::before {
+      content: "";
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      border-radius: 50%;
+      /* top: calc(50% - 30%);
+      left: calc(50% - 30%); */
+      /* 简写为 */
+      inset: 20%;
+      background: linear-gradient(225deg, #2b324b, #363b59);
+      box-shadow: -5px 5px 10px #272a40, 5px -5px 10px #3e4466;
+    }
+    .inner-dot1,
+    .inner-dot2 {
+      position: absolute;
+      border-radius: 4px;
+      box-shadow: inset 1px 1px 1px #232947, inset -1px -1px 1px #3e3d3d;
+    }
+    .inner-dot1 {
+      width: 6px;
+      height: 16px;
+      top: 5px;
+      left: calc(50% - 3px);
+      /* 倒影  */
+      -webkit-box-reflect: below calc(180px - 2 * 5px - 2 * 16px);
+    }
+    .inner-dot2 {
+      width: 16px;
+      height: 6px;
+      top: calc(50% - 3px);
+      left: 5px;
+      /* 倒影  */
+      -webkit-box-reflect: right calc(180px - 2 * 5px - 2 * 16px);
+    }
+    /* 中间圆点 */
+    .box::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      /* 注意 calc计算 中间要有空格！！！ */
+      left: calc(50% - 5px);
+      top: calc(50% - 5px);
+      background: var(--primary);
+      z-index: 2;
+    }
+    .box .base {
+      position: absolute;
+      border-radius: 5px;
+      bottom: 50%;
+      z-index: 1;
+      /* 设置transform旋转的原点 */
+      transform-origin: bottom;
+    }
+    .box .hours {
+      width: 4px;
+      height: 45px;
+      background: var(--hours-color);
+      /* 居中 */
+      left: calc(50% - 2px);
+    }
+    .box .minutes {
+      width: 4px;
+      height: 60px;
+      background: var(--minutes-color);
+      /* 居中 */
+      left: calc(50% - 2px);
+    }
+    .box .seconds {
+      width: 2px;
+      height: 80px;
+      background: var(--primary);
+      /* 居中 */
+      left: calc(50% - 1px);
+    }
+  </style>
+  <body>
+    <div class="box">
+      <div class="inner">
+        <div class="inner-dot1"></div>
+        <div class="inner-dot2"></div>
+      </div>
+      <!-- 时针 -->
+      <div class="base hours"></div>
+      <!-- 分针 -->
+      <div class="base minutes"></div>
+      <!-- 秒针 -->
+      <div class="base seconds"></div>
+    </div>
+  </body>
+  <script>
+    const hours = document.querySelector(".hours");
+    const minutes = document.querySelector(".minutes");
+    const seconds = document.querySelector(".seconds");
+    const getData = () => {
+      let curr = new Date();
+      let h = (curr.getHours() % 12) + curr.getMinutes() / 59;
+      let m = curr.getMinutes();
+      let s = curr.getSeconds();
+      h *= 30;
+      m *= 6;
+      s *= 6;
+      // 设置transform样式，rotate一定的角度
+      // 设置小时
+      setRotate(hours, h);
+      // 设置分针
+      setRotate(minutes, m);
+      // 设置秒针
+      setRotate(seconds, s);
+      // 每秒执行
+      setTimeout(getData, 1000);
+    };
+    const setRotate = (e, v) => {
+      e.style.transform = `rotate(${v}deg)`;
+    };
+    // 默认执行
+    getData();
+  </script>
+</html>
