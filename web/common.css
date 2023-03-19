@@ -56,3 +56,7 @@ button {
 .j_c {
     justify-content: center;
 }
+
+.j_b {
+    justify-content: space-between;
+}
