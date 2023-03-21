@@ -10,27 +10,26 @@
 <link rel="stylesheet" href="../common.css">
 <style>
   :root {
-    /* 柱形下部分颜色+柱形底部菱形 */
-    --bar-bg: rgba(255, 255, 255, 0.05);
     /* 柱形上部分颜色 */
-    --bar-shape: rgba(255, 255, 255, 0.07);
-    /* 柱形顶部菱形颜色 */
-    --bar-top: rgb(255, 165, 0);
+    --bar-shape: rgba(186, 210, 226, 0.9);
+    /* 柱形顶部六边形颜色 */
+    --bar-top: rgb(186, 210, 226);
+    /* 柱形下部分颜色+柱形底部六边形 */
+    --bar-bg: #f083b6;
     /* 柱形线条颜色 */
-    --bar-line: rgba(0, 0, 0, 0.1);
+    --bar-line: rgba(0, 0, 0, .2);
     /* clip-path裁剪六边形 */
     --path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
-    /* polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); */
-    /* 柱形宽度 */
-    --w: 44px;
+    /* 柱形宽度-全局 */
+    --w: 45px;
     /* 柱形高度最大值 */
-    --h: 204px;
+    --h: 300px;
   }
 
   section {
     /* flex布局 */
     display: flex;
-    align-items: baseline;
+    align-items: flex-end;
     height: var(--h);
   }
 
@@ -40,19 +39,24 @@
     height: var(--height);
     margin-right: 20px;
     background: linear-gradient(to top, var(--bar-bg), var(--bar-shape));
+    transition: all 1s;
+  }
+
+  .bar:hover {
+    height: 100%;
   }
 
   .bar:last-child {
     margin-right: 0;
   }
 
-  /* bar添加前后伪元素，设置为clip-path裁剪后的菱形 */
+  /* bar添加前后伪元素，设置为clip-path裁剪后的六边形 */
   .bar::before,
   .bar::after {
     content: "";
     position: absolute;
     width: var(--w);
-    height: calc(var(--w) / 3);
+    height: calc(var(--w) / 2.5);
     clip-path: var(--path);
     left: 0;
   }
@@ -68,33 +72,47 @@
   .bar::after {
     background: var(--bar-bg);
     bottom: 0;
-    z-index: 1;
+    /* 层级置于最下层 */
+    z-index: -1;
     transform: translateY(50%);
   }
 
   .bar span {
     position: absolute;
-    width: 1px;
-    height: 100%;
-    background: var(--bar-line);
-    left: 50%;
-    top: 0;
-  }
-
-  .a {
-    width: 200px;
-    height: 2px;
-    background: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, #4FBDCA 42%, #80F2FF 53%, rgba(79, 189, 202, 0.7) 62%, rgba(0, 0, 0, 0) 100%);
+    --d: calc(var(--w) / 2);
+    --b: calc(var(--w) / -2.5 / 2);
+    width: var(--d);
+    height: 101%;
+    left: calc(50% - var(--d) / 2);
+    bottom: var(--b);
+    box-shadow: 0px -5px 5px var(--bar-line);
   }
 </style>
 
 <body>
   <section>
-    <div class="bar" style="--height: 100%">
+    <div class="bar" style="--height: 5%;--w:25px">
+      <span></span>
+    </div>
+    <div class="bar" style="--height: 60%">
+      <span></span>
+    </div>
+    <div class="bar" style="--height: 30%;--w:50px">
+      <span></span>
+    </div>
+    <div class="bar" style="--height: 60%;--w:60px">
+      <span></span>
+    </div>
+    <div class="bar" style="--height: 30%;--w:30px">
+      <span></span>
+    </div>
+    <div class="bar" style="--height: 80%;--w:35px">
+      <span></span>
+    </div>
+    <div class="bar" style="--height: 10%;--w:45px">
       <span></span>
     </div>
   </section>
-  <div class="a"></div>
 </body>
 
 </html>
