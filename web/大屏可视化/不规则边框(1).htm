@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>不规则边框1（背景无法透明）</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      /* 宽度 */
+      --w: 353px;
+      /* 高度 */
+      --h: 60px;
+      /* clip-path裁剪形状 */
+      --path: polygon(
+        10px 0,
+        100% 0,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        0 100%,
+        0 10px
+      );
+    }
+    .box {
+      position: relative;
+      width: var(--w);
+      height: var(--h);
+      /* 圆角 */
+      border-radius: 6px;
+      background: linear-gradient(
+        140deg,
+        rgba(138, 203, 255, 0.55),
+        rgba(41, 106, 143, 0.5),
+        rgba(79, 170, 221, 1)
+      );
+      /* 进行裁剪 */
+      clip-path: var(--path);
+      font-size: 20px;
+      color: #fff;
+      /* 设置外边距 */
+      margin-bottom: 20px;
+      /* 鼠标 */
+      cursor: pointer;
+      /* 添加过渡效果 */
+      transition: all 0.5s;
+    }
+    .box:last-child {
+      margin-bottom: 0;
+    }
+    .box:hover {
+      filter: brightness(1.5);
+    }
+    /* 添加伪元素背景 */
+    .box::after {
+      content: "";
+      width: calc(100% - 3px);
+      height: calc(100% - 3px);
+      position: absolute;
+      /* 水平垂直居中 */
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      /* 置于最底层 */
+      z-index: -1;
+      /* 设置背景色 */
+      background: linear-gradient(180deg, #023863 0%, #002d48 100%);
+      /* 设置圆角 */
+      border-radius: 4px;
+      /* 设置裁剪 */
+      clip-path: var(--path);
+    }
+  </style>
+  <body>
+    <!-- flex-column j_c 公共样式 -->
+    <section class="flex-column j_c">
+      <!--  flex-row j_c 公共样式 -->
+      <div class="box flex-row j_c">苏苏_icon</div>
+      <!-- 添加新div,设置不同宽高 -->
+      <div class="box flex-row j_c" style="--w: 445px">苏苏_icon</div>
+      <div class="box flex-row j_c" style="--w: 600px">苏苏_icon</div>
+      <div class="box flex-row j_c" style="--w: 300px; --h: 200px">
+        苏苏_icon
+      </div>
+    </section>
+  </body>
+</html>

@@ -41,6 +41,7 @@ button {
     outline   : none;
 }
 
+/* flex布局相关样式 */
 .flex-column {
     display       : flex;
     flex-direction: column;
