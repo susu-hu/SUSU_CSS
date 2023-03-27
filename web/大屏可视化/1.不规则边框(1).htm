@@ -27,7 +27,6 @@
       position: relative;
       width: var(--w);
       height: var(--h);
-      /* 圆角 */
       border-radius: 6px;
       background: linear-gradient(
         140deg,
@@ -39,11 +38,8 @@
       clip-path: var(--path);
       font-size: 20px;
       color: #fff;
-      /* 设置外边距 */
       margin-bottom: 20px;
-      /* 鼠标 */
       cursor: pointer;
-      /* 添加过渡效果 */
       transition: all 0.5s;
     }
     .box:last-child {
@@ -62,27 +58,42 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      /* 置于最底层 */
+      /* 置于底层 */
       z-index: -1;
       /* 设置背景色 */
       background: linear-gradient(180deg, #023863 0%, #002d48 100%);
-      /* 设置圆角 */
       border-radius: 4px;
       /* 设置裁剪 */
       clip-path: var(--path);
     }
+    .susu {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, red, orange);
+      position: relative;
+    }
+    .susu::after {
+      content: "";
+      position: absolute;
+      width: calc(100% - 4px);
+      height: calc(100% - 4px);
+      background: #222;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
   </style>
   <body>
-    <!-- flex-column j_c 公共样式 -->
     <section class="flex-column j_c">
-      <!--  flex-row j_c 公共样式 -->
       <div class="box flex-row j_c">苏苏_icon</div>
-      <!-- 添加新div,设置不同宽高 -->
       <div class="box flex-row j_c" style="--w: 445px">苏苏_icon</div>
       <div class="box flex-row j_c" style="--w: 600px">苏苏_icon</div>
       <div class="box flex-row j_c" style="--w: 300px; --h: 200px">
         苏苏_icon
       </div>
+      <div class="susu"></div>
     </section>
   </body>
 </html>
