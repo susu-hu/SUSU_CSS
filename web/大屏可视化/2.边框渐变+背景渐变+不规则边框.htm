@@ -1,15 +1,118 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2.边框渐变+背景渐变+不规则边框</title>
-</head>
-<link rel="stylesheet" href="../common.css">
-<style></style>
-<body>
-    <div class="box"></div>
-</body>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      /* 渐变边框色 */
+      --line-bg: linear-gradient(
+        180deg,
+        rgba(138, 203, 255, 1),
+        rgba(41, 106, 143, 1),
+        rgba(190, 40, 40, 1)
+      );
+      /* 定义宽高 */
+      --w: 300px;
+      --h: 350px;
+      /* 内容背景色 */
+      --content-bg: linear-gradient(181deg, #021734 0%, #3d1328 100%);
+      /* clip-path裁剪 */
+      --path: polygon(
+        0 0,
+        calc(100% - 10px) 0,
+        100% 10px,
+        100% 100%,
+        10px 100%,
+        0 calc(100% - 10px)
+      );
+    }
+    body {
+      background: linear-gradient(
+        270deg,
+        rgba(1, 33, 62, 0.95) 0%,
+        rgba(1, 33, 62, 0.9) 87%
+      );
+    }
+    .dialog {
+      position: relative;
+      font-size: 20px;
+      text-shadow: 0 10px 12px #001025;
+    }
+    .box {
+      width: var(--w);
+      height: var(--h);
+      background: var(--line-bg);
+      border-radius: 6px;
+      position: relative;
+      z-index: 1;
+      /* 添加resize */
+      overflow: hidden;
+      resize: both;
+      min-width: 250px;
+      min-height: 100px;
+    }
+    .box::after {
+      content: "";
+      width: calc(100% - 4px);
+      height: calc(100% - 4px);
+      position: absolute;
+      /* 定义背景色 */
+      background: var(--content-bg);
+      /* 水平垂直 居中 */
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      /* 添加圆角 */
+      border-radius: 4px;
+    }
+    .dialog-rect {
+      width: 80%;
+      height: 90%;
+      position: absolute;
+      right: -8px;
+      bottom: -8px;
+      border-radius: 6px;
+      background: #66b5f3;
+      clip-path: var(--path);
+    }
+    .dialog-rect::after {
+      content: "";
+      position: absolute;
+      width: calc(100% - 3px);
+      height: calc(100% - 3px);
+      /* 水平垂直 居中 */
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      background: #093258;
+      border-radius: 4px;
+      clip-path: var(--path);
+    }
+    .dialog::after {
+      content: "";
+      border: 3px solid #32c5ff;
+      width: 40%;
+      height: 70%;
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      z-index: 1;
+      border-right: none;
+      border-bottom: none;
+      border-radius: 6px 0 0 0;
+    }
+  </style>
+  <body>
+    <div class="dialog">
+      <span class="dialog-rect"></span>
+      <div class="box flex-row j_c">CSS 实现不规则边框（2）</div>
+    </div>
+  </body>
 </html>
