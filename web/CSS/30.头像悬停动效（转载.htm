@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      30.头像悬停动效（转载,参考文章链接：https://css-tricks.com/a-fancy-hover-effect-for-your-avatar/#top-of-site
+    </title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      /* 图片大小 */
+      --s: 280px;
+      /* 边框大小 */
+      --b: 5px;
+      /* 边框颜色 */
+      --c: #da5132;
+      /* 背景颜色 */
+      --bg: #e2eedf;
+      /* 默认缩放比例 */
+      --f: 1;
+    }
+    img {
+      box-sizing: content-box;
+      width: var(--s);
+      aspect-ratio: 1;
+      object-fit: contain;
+      padding-top: calc(var(--s) / 5);
+      cursor: pointer;
+      transform: scale(var(--f));
+      transition: 0.5s;
+      border-radius: 0 0 999px 999px;
+      --o: calc((1 / var(--f) - 1) * var(--s) / 2 - var(--b));
+      outline: var(--b) solid var(--c);
+      outline-offset: var(--o);
+      --g: 50% / calc(100% / var(--f)) 100% no-repeat content-box;
+      background: radial-gradient(
+          circle closest-side,
+          var(--bg) calc(99% - var(--b)),
+          var(--c) calc(100% - var(--b)) 99%,
+          #0000
+        )
+        var(--g);
+      -webkit-mask: linear-gradient(#000 0 0) no-repeat 50% calc(1px - var(--o)) /
+          calc(100% / var(--f) - 2 * var(--b) - 2px) 50%,
+        radial-gradient(circle closest-side, #000 99%, #0000) var(--g);
+      mask: linear-gradient(#000 0 0) no-repeat 50% calc(1px - var(--o)) /
+          calc(100% / var(--f) - 2 * var(--b) - 2px) 50%,
+        radial-gradient(circle closest-side, #000 99%, #0000) var(--g);
+    }
+    img:hover {
+      /* 缩放比例 */
+      --f: 1.35;
+    }
+  </style>
+  <body>
+    <img src="../img/avatar.png" alt="头像" />
+  </body>
+</html>
