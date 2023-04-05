@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>31.css3实现一个3d楼梯动画</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --c1: #6ec5e7;
+      --c2: #c2e9fb;
+      --c3: skyblue;
+    }
+    .container {
+      position: relative;
+      width: calc(var(--count) * var(--w));
+      height: calc(var(--count) * var(--h));
+      transform-style: preserve-3d;
+      transform: rotateX(-30deg) rotateY(30deg);
+      /* 添加旋转动画 */
+      animation: animate 10s linear infinite;
+      margin-right: 50px;
+    }
+    @keyframes animate {
+      0% {
+        transform: rotateX(-30deg) rotateY(0deg);
+      }
+      100% {
+        transform: rotateX(-30deg) rotateY(1turn);
+      }
+    }
+    .container .step {
+      position: absolute;
+      --i: calc(var(--c) -1);
+      left: calc(var(--w) * var(--i));
+      width: var(--w);
+      height: calc(var(--h) * var(--c));
+      bottom: 0;
+      transform-style: preserve-3d;
+    }
+    .container .step::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: var(--w);
+      height: calc(var(--count) * var(--h));
+      background: var(--c3);
+      /* z轴偏移为总高度的2分之一 */
+      --z: calc(var(--count) * var(--h) / 2);
+      transform: rotateX(90deg) translateZ(var(--z));
+    }
+    .container .step:hover::before {
+      cursor: pointer;
+      filter: brightness(1.1);
+    }
+    .container .step::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(var(--count) * var(--h));
+      height: var(--h);
+      background: var(--c2);
+      /* z轴偏移为总高度的2分之一  */
+      --z: calc(var(--count) * var(--h) / 2);
+      transform: rotateY(90deg) translateZ(calc(-1 * var(--z)));
+    }
+    .container .step span {
+      position: absolute;
+      display: block;
+      width: var(--w);
+      height: 100%;
+      background: var(--c1);
+      transform-style: preserve-3d;
+    }
+    .container .step span:nth-child(1) {
+      /* z轴偏移为总高度的2分之一  */
+      --z: calc(var(--count) * var(--h) / 2);
+      transform: translateZ(var(--z));
+    }
+    .container .step span:nth-child(2) {
+      /* z轴偏移为总高度的2分之一  */
+      --z: calc(var(--count) * var(--h) / 2);
+      transform: translateZ(calc(-1 * var(--z)));
+    }
+    .container .step:last-child span:nth-child(2)::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(var(--count) * var(--h));
+      height: 100%;
+      background: var(--c2);
+      /* z轴偏移为总高度的2分之一  */
+      --z: calc(var(--count) * var(--h) / 2);
+      /* 总高度的2分之一 - 宽度 */
+      --k: calc(var(--z) - var(--w));
+      transform: rotateY(90deg)
+        translate3d(calc(-1 * var(--z)), 0, calc(-1 * var(--k)));
+    }
+    .container .step:first-child span:nth-child(2)::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--c1);
+      width: calc(100% * var(--count));
+      height: calc(var(--count) * var(--h));
+      /* z轴偏移为总高度的2分之一  */
+      --z: calc(var(--count) * var(--h) / 2);
+      /* 总高度的2分之一 - 宽度 */
+      --k: calc(var(--z) - var(--h));
+      transform: rotateX(90deg) translate3d(0, var(--z), var(--k));
+      filter: blur(20px);
+    }
+  </style>
+  <body>
+    <div class="container" style="--h: 20px; --w: 20px; --count: 6">
+      <div class="step" style="--c: 1">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="step" style="--c: 2">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="step" style="--c: 3">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="step" style="--c: 4">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="step" style="--c: 5">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="step" style="--c: 6">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="container" style="--h: 40px; --w: 30px; --count: 4">
+      <div class="step" style="--c: 1">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="step" style="--c: 2">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="step" style="--c: 3">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="step" style="--c: 4">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </body>
+</html>
