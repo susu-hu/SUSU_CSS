@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-  <title>灰大教程</title>
+  <title>参考自灰大教程</title>
   <meta http-equiv="content-type" content="text/html" charset="UTF-8">
   <link rel="stylesheet" href="../common.css">
   <style type="text/css">
@@ -25,7 +25,7 @@
       z-index: 3;
     }
 
-    .huiSeZhiZhao20210901124307 {
+    .lizi {
       position: absolute;
       top: 158px;
       left: 60px;
@@ -33,40 +33,11 @@
       width: 280px;
       height: 132px;
       background: url(../img/guang.png) no-repeat 0px 0px;
-      animation: huida20210901124307 1s infinite steps(35, end);
+      animation: rotate 1s infinite steps(35, end);
     }
 
-    @-webkit-keyframes huida20210901124307 {
-      0% {
-        background-position-y: 0px;
-      }
-
-      100% {
-        background-position-y: -4620px;
-      }
-    }
-
-    @-moz-keyframes huida20210901124307 {
-      0% {
-        background-position-y: 0px;
-      }
-
-      100% {
-        background-position-y: -4620px;
-      }
-    }
-
-    @-ms-keyframes huida20210901124307 {
-      0% {
-        background-position-y: 0px;
-      }
-
-      100% {
-        background-position-y: -4620px;
-      }
-    }
-
-    @keyframes huida20210901124307 {
+  
+    @keyframes rotate {
       0% {
         background-position-y: 0px;
       }
@@ -85,7 +56,7 @@
     .light {
       width: 400px;
       height: 400px;
-      background: url(../img//light.png) no-repeat center 135px;
+      background: url(../img/light.png) no-repeat center 135px;
       position: absolute;
       top: 0;
       left: 0;
@@ -97,7 +68,7 @@
   <div class="rowFlex">
     <div class="container">
       <div id="putPie" class="putPie"></div>
-      <div class="huiSeZhiZhao20210901124307"></div>
+      <div class="lizi"></div>
       <div class="light"></div>
     </div>
   </div>

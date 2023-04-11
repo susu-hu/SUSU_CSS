@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.雪碧图实现粒子旋转动画</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    .container {
+      width: 280px;
+      height: calc(4620px / 35);
+      background: url(../img/guang.png) no-repeat 0 0;
+      position: relative;
+      font-size: 30px;
+      /* 添加动画 */
+      animation: rotate 1s infinite steps(35, end);
+    }
+    @keyframes rotate {
+      0% {
+        background-position-y: 0px;
+      }
+      100% {
+        background-position-y: -4620px;
+      }
+    }
+    .container::after {
+      content: "";
+      position: absolute;
+      width: 312px;
+      height: 183px;
+      background: url(../img/light.png) no-repeat;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .container span {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #3f567c,
+        0 0 35px #3f567c, 0 0 40px #3f567c, 0 0 50px #3f567c, 0 0 75px #3f567c;
+    }
+  </style>
+  <body>
+    <div class="container flex-row j_c">
+      <span>苏苏_icon</span>
+    </div>
+  </body>
+</html>
