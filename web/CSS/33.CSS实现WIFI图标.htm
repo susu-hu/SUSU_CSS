@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>33.CSS实现wifi图标</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --bg: #fff;
+      --dot: 20px;
+      --w: 300px;
+      --gap: 45px;
+    }
+    .container {
+      width: var(--w);
+      height: calc(var(--gap) * 3 + var(--dot));
+      border: 1px solid red;
+      position: relative;
+    }
+    .dot {
+      width: var(--dot);
+      height: var(--dot);
+      border-radius: 50%;
+      background: var(--bg);
+      position: absolute;
+      top: calc(var(--gap) * 3);
+      left: calc(50% - var(--dot) / 2);
+    }
+    .line {
+      position: absolute;
+      /* 水平居中 */
+      left: calc(50% - var(--width) / 2);
+      /* 距离顶部的距离，根据gap来定 */
+      top: calc(var(--gap) * var(--i));
+      --width: calc(var(--w) - var(--gap) * 2 * var(--i));
+      width: var(--width);
+      height: var(--width);
+      border-radius: 50%;
+      background: conic-gradient(var(--bg) 0, var(--bg) 35%, transparent 35%);
+      -webkit-mask: radial-gradient(
+        transparent,
+        transparent calc(var(--width) / 2 - var(--dot) - 1px),
+        #000 calc(var(--width) / 2 - var(--dot)),
+        #000 calc(var(--width) / 2 - var(--dot)),
+        #000 100%
+      );
+      transform: rotate(-60deg);
+    }
+    .line::after,
+    .line::before {
+      content: "";
+      position: absolute;
+      width: var(--dot);
+      height: var(--dot);
+      background: var(--bg);
+      border-radius: 50%;
+      --width: calc(var(--w) - var(--gap) * 2 * var(--i));
+      left: calc(var(--width) / 2 - var(--dot) / 2);
+      top: calc(var(--width) / 2 - var(--dot) / 2);
+    }
+    .line::before {
+      transform: translate(0, calc(var(--dot) / 2 - var(--width) / 2));
+    }
+    .line::after {
+      transform: rotate(126deg)
+        translate(0, calc(var(--dot) / 2 - var(--width) / 2));
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="line" style="--i: 0"></div>
+      <div class="line" style="--i: 1"></div>
+      <div class="line" style="--i: 2"></div>
+      <div class="dot"></div>
+    </div>
+  </body>
+</html>
