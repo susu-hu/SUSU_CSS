@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>32</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --bg: #fff;
+      --w: 250px;
+      --d: 30px;
+    }
+    .container {
+      width: var(--w);
+      height: var(--w);
+      position: relative;
+    }
+    .line {
+      position: absolute;
+      width: var(--w);
+      height: var(--w);
+      left: 0;
+      top: 0;
+      border-radius: 50%;
+      background: conic-gradient(var(--bg) 35%, transparent 35%);
+      -webkit-mask: radial-gradient(
+        transparent calc(var(--w) / 2 - var(--d) - 1px),
+        #000 calc(var(--w) / 2 - var(--d))
+      );
+    }
+    .line::before,
+    .line::after {
+      content: "";
+      position: absolute;
+      width: var(--d);
+      height: var(--d);
+      border-radius: 50%;
+      left: calc(var(--w) / 2 - var(--d) / 2);
+      top: calc(var(--w) / 2 - var(--d) / 2);
+      background: red;
+      /* var(--bg); */
+    }
+    .line::before {
+      transform: translate(0, calc(var(--d) / 2 - var(--w) / 2));
+    }
+    .line::after {
+      transform: rotate(calc(360deg * 0.35))
+        translate(0, calc(var(--d) / 2 - var(--w) / 2));
+    }
+    .line2 {
+      background: conic-gradient(var(--bg) 20%, transparent 20%);
+      -webkit-mask: radial-gradient(
+        transparent calc(var(--w) / 2 - var(--d) - 1px),
+        #000 calc(var(--w) / 2 - var(--d))
+      );
+      /* transform: rotate(136deg); */
+      /* 16deg */
+      transform: rotate(calc(360deg * (0.35 + 0.05)));
+    }
+    .line2::after {
+      transform: rotate(calc(360deg * 0.2))
+        translate(0, calc(var(--d) / 2 - var(--w) / 2));
+    }
+
+    .line3 {
+      background: conic-gradient(var(--bg) 30%, transparent 30%);
+      -webkit-mask: radial-gradient(
+        transparent calc(var(--w) / 2 - var(--d) - 1px),
+        #000 calc(var(--w) / 2 - var(--d))
+      );
+      /* transform: rotate(218deg); */
+      transform: rotate(calc(360deg * (0.35 + 0.2 + 0.05 * 2)));
+    }
+    .line3::after {
+      transform: rotate(calc(360deg * 0.3))
+        translate(0, calc(var(--d) / 2 - var(--w) / 2));
+    }
+    .line4 {
+      background: conic-gradient(var(--bg) 15%, transparent 15%);
+      -webkit-mask: radial-gradient(
+        transparent calc(var(--w) / 2 - var(--d) - 1px),
+        #000 calc(var(--w) / 2 - var(--d))
+      );
+      /* transform: rotate(218deg); */
+      transform: rotate(calc(360deg * (0.35 + 0.2 + 0.3 + 0.05 * 3)));
+    }
+    .line4::after {
+      transform: rotate(calc(360deg * 0.15))
+        translate(0, calc(var(--d) / 2 - var(--w) / 2));
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="line" style="--bg: #ffad4c"></div>
+      <div class="line line2" style="--bg: #48ac42"></div>
+      <div class="line line3" style="--bg: #6f8aff"></div>
+      <div class="line line4" style="--bg: #31dcc9"></div>
+    </div>
+  </body>
+</html>
