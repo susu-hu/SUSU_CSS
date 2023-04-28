@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>36.flex为1引起高度和宽度溢出的问题</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    /* flex竖向布局 */
+    .box {
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      height: 300px;
+    }
+
+    .box-item {
+      flex: 1;
+      border: 1px solid #fff;
+      /* 解决溢出压缩其他模块 */
+      height: 0;
+    }
+
+    .box-item-content {
+      height: 100%;
+      background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+      overflow: auto;
+    }
+
+    .box-item .data {
+      width: 50%;
+      height: 420px;
+      background: rgba(0, 0, 0, 0.5);
+      writing-mode: vertical-lr;
+      border-radius: 0 20px 20px 0;
+      padding: 20px;
+    }
+
+    /* flex横向布局 */
+    .box-x {
+      width: 200px;
+      display: flex;
+      height: 300px;
+    }
+
+    .box-item-x {
+      flex: 1;
+      border: 1px solid #fff;
+      /* 解决溢出压缩其他模块 */
+      width: 0;
+    }
+
+    .box-item-x .data {
+      width: 300px;
+      background: rgba(0, 0, 0, 0.5);
+      height: 50%;
+      border-radius: 0 0 20px 20px;
+      padding: 20px;
+    }
+  </style>
+
+  <body>
+    <div class="box" style="margin-right: 20px">
+      <div class="box-item">
+        <div class="box-item-content">
+          <div class="data">
+            苏苏就是小苏苏呀嘻嘻哈哈哈哈哈哈哈
+            苏苏就是小苏苏呀嘻嘻哈哈哈哈哈哈哈
+          </div>
+        </div>
+      </div>
+      <div class="box-item"></div>
+    </div>
+    <div class="box-x">
+      <div class="box-item-x"></div>
+      <div class="box-item-x">
+        <div class="box-item-content">
+          <div class="data">苏苏就是小苏苏呀嘻嘻 哈哈哈哈哈哈哈</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
