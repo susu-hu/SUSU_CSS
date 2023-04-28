@@ -10,25 +10,23 @@
   <style>
     /* flex竖向布局 */
     .box {
-      width: 200px;
       display: flex;
       flex-direction: column;
+      width: 200px;
       height: 300px;
     }
-
     .box-item {
+      /* 占据高度的各一半 */
       flex: 1;
       border: 1px solid #fff;
       /* 解决溢出压缩其他模块 */
       height: 0;
     }
-
     .box-item-content {
       height: 100%;
-      background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
       overflow: auto;
+      background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
     }
-
     .box-item .data {
       width: 50%;
       height: 420px;
@@ -37,25 +35,21 @@
       border-radius: 0 20px 20px 0;
       padding: 20px;
     }
-
     /* flex横向布局 */
     .box-x {
       width: 200px;
-      display: flex;
       height: 300px;
+      display: flex;
     }
-
     .box-item-x {
       flex: 1;
       border: 1px solid #fff;
       /* 解决溢出压缩其他模块 */
       width: 0;
     }
-
     .box-item-x .data {
       width: 300px;
       background: rgba(0, 0, 0, 0.5);
-      height: 50%;
       border-radius: 0 0 20px 20px;
       padding: 20px;
     }
@@ -66,8 +60,7 @@
       <div class="box-item">
         <div class="box-item-content">
           <div class="data">
-            苏苏就是小苏苏呀嘻嘻哈哈哈哈哈哈哈
-            苏苏就是小苏苏呀嘻嘻哈哈哈哈哈哈哈
+            苏苏就是小苏苏嘻嘻哈哈哈哈哈哈哈 苏苏就是小苏苏嘻嘻哈哈哈哈哈哈哈
           </div>
         </div>
       </div>
@@ -77,7 +70,7 @@
       <div class="box-item-x"></div>
       <div class="box-item-x">
         <div class="box-item-content">
-          <div class="data">苏苏就是小苏苏呀嘻嘻 哈哈哈哈哈哈哈</div>
+          <div class="data">苏苏就是小苏苏嘻嘻哈哈哈哈哈哈哈</div>
         </div>
       </div>
     </div>
