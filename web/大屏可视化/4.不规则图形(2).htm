@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.不规则图形(2)</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      /* 宽度 */
+      --w: 353px;
+      /* 高度 */
+      --h: 60px;
+      --mask: linear-gradient(-45deg, transparent 6px, red 0);
+      --mask1: linear-gradient(-45deg, transparent 6px, red 0) bottom right /
+          100% 51% no-repeat,
+        linear-gradient(135deg, transparent 6px, red 0) top left / 100% 51%
+          no-repeat;
+    }
+    .arrow {
+      position: relative;
+      width: 180px;
+      height: 64px;
+      background: #f49714;
+    }
+    .arrow::after {
+      content: "";
+      position: absolute;
+      width: 32px;
+      height: 64px;
+      top: 0;
+      right: -32px;
+      background: linear-gradient(
+          -45deg,
+          transparent 0,
+          transparent 22px,
+          #f49714 22px,
+          #f49714 100%
+        ),
+        linear-gradient(
+          -135deg,
+          transparent 0,
+          transparent 22px,
+          #f49714 22px,
+          #f49714 100%
+        );
+      background-size: 32px 32px;
+      background-repeat: no-repeat;
+      background-position: 0 bottom, 0 top;
+    }
+    .rect {
+      position: relative;
+      overflow: hidden;
+      width: var(--w);
+      height: var(--h);
+      border-radius: 6px;
+      background: linear-gradient(
+        140deg,
+        rgba(138, 203, 255, 0.55),
+        rgba(41, 106, 143, 0.5),
+        rgba(79, 170, 221, 1)
+      );
+    }
+
+    .rect1 {
+      -webkit-mask: var(--mask);
+      /*chrome*/
+      /*source-in | destination-in  */
+      /* -webkit-mask-composite: source-in; */
+      /*Firefox*/
+      /* mask-composite: intersect;  */
+    }
+    .rect2 {
+      background: linear-gradient(135deg, transparent 6px, red 0) top left,
+        linear-gradient(-135deg, transparent 6px, red 0) top right,
+        linear-gradient(-45deg, transparent 6px, red 0) bottom right,
+        linear-gradient(45deg, transparent 6px, red 0) bottom left;
+      background-size: 50% 50%;
+      background-repeat: no-repeat;
+    }
+    .rect3 {
+      background: radial-gradient(circle at top left, transparent 6px, red 0)
+          top left,
+        radial-gradient(circle at top right, transparent 6px, red 0) top right,
+        radial-gradient(circle at bottom right, transparent 6px, red 0) bottom
+          right,
+        radial-gradient(circle at bottom left, transparent 6px, red 0) bottom
+          left;
+      background-size: 50% 50%;
+      background-repeat: no-repeat;
+    }
+    .rect4 {
+      clip-path: polygon(
+        15px 0,
+        calc(100% - 15px) 0,
+        100% 15px,
+        100% calc(100% - 15px),
+        calc(100% - 15px) 100%,
+        15px 100%,
+        0 calc(100% - 15px),
+        0 15px
+      );
+    }
+    .rect5 {
+      -webkit-mask: var(--mask1);
+    }
+    .rect5::after {
+      content: "";
+      width: calc(100% - 3px);
+      height: calc(100% - 3px);
+      position: absolute;
+      /* 水平垂直居中 */
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      /* 置于底层 */
+      z-index: -1;
+      /* 设置背景色 */
+      background: linear-gradient(180deg, #023863 0%, #002d48 100%);
+      border-radius: 4px;
+      -webkit-mask: var(--mask1);
+    }
+  </style>
+  <body>
+    <section>
+      <div class="arrow" style="margin-bottom: 20px"></div>
+      <div class="rect rect1" style="margin-bottom: 20px"></div>
+      <div class="rect rect5" style="margin-bottom: 20px"></div>
+      <div class="rect rect2" style="margin-bottom: 20px"></div>
+      <div class="rect rect3" style="margin-bottom: 20px"></div>
+      <div class="rect rect4" style="margin-bottom: 20px"></div>
+    </section>
+  </body>
+</html>
