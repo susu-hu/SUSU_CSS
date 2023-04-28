@@ -1,63 +1,76 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 * {
-    padding: 0;
-    margin : 0;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    font-size      : 16px;
-    display        : flex;
-    align-items    : center;
-    justify-content: center;
-    background     : #222;
-    color          : #fff;
-    overflow       : hidden;
-    height         : 100vh;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #222;
+  color: #fff;
+  overflow: hidden;
+  height: 100vh;
 }
 
 /* 设置水平垂直居中 */
 
 input {
-    background    : none;
-    border        : none;
-    outline       : none;
-    vertical-align: middle;
+  background: none;
+  border: none;
+  outline: none;
+  vertical-align: middle;
 }
 
 /* 防止未加载完成显示undefined */
 [v-cloak] {
-    display: none;
+  display: none;
 }
 
 /* 去掉button默认样式 */
 button {
-    border    : none;
-    background: transparent;
-    outline   : none;
+  border: none;
+  background: transparent;
+  outline: none;
 }
 
 /* flex布局相关样式 */
 .flex-column {
-    display       : flex;
-    flex-direction: column;
-    align-items   : center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .flex-row {
-    display       : flex;
-    flex-direction: row;
-    align-items   : center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .j_c {
-    justify-content: center;
+  justify-content: center;
 }
 
 .j_b {
-    justify-content: space-between;
+  justify-content: space-between;
 }
+
+/**滚动条的宽度*/
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+/* 滚动条的滑块 */
+::-webkit-scrollbar-thumb {
+  background-color: #eaecf1;
+  border-radius: 3px;
+}
+
