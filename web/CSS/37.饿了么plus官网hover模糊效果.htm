@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>37.饿了么plus官网hover模糊效果</title>
+</head>
+<style>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  /**滚动条的宽度*/
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* 滚动条的滑块 */
+  ::-webkit-scrollbar-thumb {
+    background-color: orange;
+    border-radius: 3px;
+  }
+
+
+
+  body {
+    background: #fff;
+  }
+
+  :root {
+    --header-height: 80px;
+    --border-color: #dcdfe6;
+    --bg-color: #ffffff;
+  }
+
+  .head-bar {
+    position: sticky;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--border-color);
+    height: var(--header-height);
+    padding: 0 12px 0 24px;
+    background-image: radial-gradient(transparent 1px, var(--bg-color) 1px);
+    background-size: 4px 4px;
+    backdrop-filter: saturate(50%) blur(4px);
+    -webkit-backdrop-filter: saturate(50%) blur(4px);
+  }
+
+  .item {
+    margin: 20px auto;
+    width: 500px;
+    height: 156px;
+    background: rgba(20, 97, 125, 0.16);
+    box-shadow: 4px 2px 4px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 100px;
+    backdrop-filter: blur(4px);
+  }
+
+  .item:nth-child(even) {
+    background: rgba(16, 68, 75, 0.3);
+  }
+</style>
+
+<body>
+  <div class="head-bar"></div>
+  <section>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </section>
+</body>
+
+</html>
