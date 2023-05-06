@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    div,
+    svg {
+      font-size: 26px;
+      line-height: 45px;
+      font-weight: bold;
+    }
+    div:hover,
+    svg:hover {
+      filter: brightness(2);
+      transition: 0.5s all linear;
+      cursor: pointer;
+    }
+    div:nth-child(1) {
+      background: linear-gradient(180deg, red 0%, #4effe4 100%);
+      /* 将背景裁剪为文字 */
+      background-clip: text;
+      -webkit-background-clip: text;
+      /* 设置color为透明 */
+      color: transparent;
+      /* 或者设置text-fill-color为透明 */
+      /* -webkit-text-fill-color: transparent; */
+    }
+    div:nth-child(2) {
+      position: relative;
+      color: red;
+    }
+    div:nth-child(2)::after {
+      content: attr(data-text);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      color: #4effe4;
+      -webkit-mask: linear-gradient(0deg, red, transparent);
+    }
+    svg {
+      width: 500px;
+      height: 50px;
+    }
+  </style>
+  <body>
+    <section>
+      <div>
+        方法一:background-clip+背景渐变色+color/text-fill-color设置为透明
+      </div>
+      <div data-text="方法二:伪元素+mask遮罩">方法二:伪元素+mask遮罩</div>
+      <svg>
+        <defs>
+          <!-- 渐变色 -->
+          <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" style="stop-color: red"></stop>
+            <stop offset="1" style="stop-color: #4effe4"></stop>
+          </linearGradient>
+        </defs>
+        <text fill="url(#gradient)" x="0%" y="70%">方法三:SVG</text>
+      </svg>
+    </section>
+  </body>
+</html>
