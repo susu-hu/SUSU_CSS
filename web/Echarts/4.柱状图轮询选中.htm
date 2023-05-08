@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.柱状图轮询选中</title>
+  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.1/echarts.min.js"></script>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    body {
+      background: #2d2f38;
+    }
+
+    .container {
+      width: 550px;
+      height: 400px;
+      padding: 40px;
+      border-radius: 20px;
+      background: linear-gradient(225deg, rgb(13, 13, 14), #221c22);
+      box-shadow: -25px 25px 45px #111213, 25px -25px 45px #221c22;
+    }
+
+    .chart {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <div class="chart" id="chart"></div>
+    </div>
+  </body>
+  <script>
+    const dom = document.getElementById("chart");
+    const myChart = echarts.init(dom);
+    const xData = ["测1", "测2", "测3", "测4", "测5", "测6"];
+    const yData = [200, 500, 400, 700, 680, 2001];
+    const MAX = [300, 777, 888, 999, 680, 2200];
+
+    //渲染图表
+    const renderChart = (myChart) => {
+      // 绘制左侧面
+      const CubeLeft = echarts.graphic.extendShape({
+        shape: {
+          x: 0,
+          y: 0,
+        },
+        buildPath: function (ctx, shape) {
+          const xAxisPoint = shape.xAxisPoint;
+          const c0 = [shape.x, shape.y];
+          const c1 = [shape.x - 5, shape.y - 5];
+          const c2 = [xAxisPoint[0] - 5, xAxisPoint[1] - 5];
+          const c3 = [xAxisPoint[0], xAxisPoint[1]];
+          ctx
+            .moveTo(c0[0], c0[1])
+            .lineTo(c1[0], c1[1])
+            .lineTo(c2[0], c2[1])
+            .lineTo(c3[0], c3[1])
+            .closePath();
+        },
+      });
+      // 绘制右侧面
+      const CubeRight = echarts.graphic.extendShape({
+        shape: {
+          x: 0,
+          y: 0,
+        },
+        buildPath: function (ctx, shape) {
+          const xAxisPoint = shape.xAxisPoint;
+          const c1 = [shape.x, shape.y];
+          const c2 = [xAxisPoint[0], xAxisPoint[1]];
+          const c3 = [xAxisPoint[0] + 10, xAxisPoint[1] - 5];
+          const c4 = [shape.x + 10, shape.y - 5];
+          ctx
+            .moveTo(c1[0], c1[1])
+            .lineTo(c2[0], c2[1])
+            .lineTo(c3[0], c3[1])
+            .lineTo(c4[0], c4[1])
+            .closePath();
+        },
+      });
+      // 绘制顶面
+      const CubeTop = echarts.graphic.extendShape({
+        shape: {
+          x: 0,
+          y: 0,
+        },
+        buildPath: function (ctx, shape) {
+          const c1 = [shape.x, shape.y];
+          const c2 = [shape.x + 10, shape.y - 5];
+          const c3 = [shape.x + 5, shape.y - 10];
+          const c4 = [shape.x - 5, shape.y - 5];
+          ctx
+            .moveTo(c1[0], c1[1])
+            .lineTo(c2[0], c2[1])
+            .lineTo(c3[0], c3[1])
+            .lineTo(c4[0], c4[1])
+            .closePath();
+        },
+      });
+      // 注册三个面图形
+      echarts.graphic.registerShape("CubeLeft", CubeLeft);
+      echarts.graphic.registerShape("CubeRight", CubeRight);
+      echarts.graphic.registerShape("CubeTop", CubeTop);
+      const option = {
+        backgroundColor: "transparent",
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "line", // 默认为直线，可选为：'line' | 'shadow'
+          },
+          formatter: function (params, ticket, callback) {
+            const item = params[1];
+            return item.name + " : " + item.value;
+          },
+        },
+        grid: {
+          left: "1%", //图表距边框的距离
+          right: "3%",
+          top: "11%",
+          bottom: "5%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          data: xData,
+          axisLine: {
+            show: true,
+            lineStyle: { color: "#636E7C" },
+          },
+          axisLabel: {
+            color: "rgba(255,255,255,.8)", //坐标的字体颜色
+            fontSize: 12,
+          },
+          axisTick: {
+            //坐标轴刻度颜色
+            show: false,
+            length: 9,
+            alignWithLabel: true,
+            lineStyle: {
+              color: "#7DFFFD",
+            },
+          },
+          offset: 15,
+        },
+        yAxis: {
+          type: "value",
+          axisLine: {
+            show: true,
+            lineStyle: { color: "#636E7C" },
+          },
+          axisLabel: {
+            color: "rgba(255,255,255,.8)", //坐标的字体颜色
+            fontSize: 12,
+          },
+          axisTick: {
+            //坐标轴刻度颜色
+            show: false,
+            length: 9,
+            alignWithLabel: true,
+            lineStyle: {
+              color: "#7DFFFD",
+            },
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: "rgba(255,255,255,.25)",
+              type: "dashed",
+            },
+          },
+        },
+        series: [
+          // 透明层
+          {
+            type: "custom",
+            renderItem: function (params, api) {
+              const location = api.coord([api.value(0), api.value(1)]);
+              return {
+                type: "group",
+                children: [
+                  {
+                    type: "CubeLeft",
+                    shape: {
+                      api,
+                      x: location[0],
+                      y: location[1],
+                      xAxisPoint: api.coord([api.value(0), 0]),
+                    },
+                    style: {
+                      fill: "rgba(47,102,192,.27)",
+                    },
+                  },
+                  {
+                    type: "CubeRight",
+                    shape: {
+                      api,
+                      x: location[0],
+                      y: location[1],
+                      xAxisPoint: api.coord([api.value(0), 0]),
+                    },
+                    style: {
+                      fill: "rgba(59,128,226,.27)",
+                    },
+                  },
+                  {
+                    type: "CubeTop",
+                    shape: {
+                      api,
+                      x: location[0],
+                      y: location[1],
+                      xAxisPoint: api.coord([api.value(0), 0]),
+                    },
+                    style: {
+                      fill: "rgba(72,156,221,.27)",
+                    },
+                  },
+                ],
+              };
+            },
+            data: MAX,
+          },
+          //内容层
+          {
+            type: "custom",
+            renderItem: (params, api) => {
+              const location = api.coord([api.value(0), api.value(1)]);
+              var color =
+                api.value(1) > 2000
+                  ? "rgb(136, 26, 7)"
+                  : new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      {
+                        offset: 0,
+                        color: "rgb(142, 220, 190)",
+                      },
+                      {
+                        offset: 1,
+                        color: "rgb(85, 101, 95)",
+                      },
+                    ]);
+              return {
+                type: "group",
+                children: [
+                  {
+                    type: "CubeLeft",
+                    shape: {
+                      api,
+                      xValue: api.value(0),
+                      yValue: api.value(1),
+                      x: location[0],
+                      y: location[1],
+                      xAxisPoint: api.coord([api.value(0), 0]),
+                    },
+                    style: {
+                      fill: color,
+                    },
+                  },
+                  {
+                    type: "CubeRight",
+                    shape: {
+                      api,
+                      xValue: api.value(0),
+                      yValue: api.value(1),
+                      x: location[0],
+                      y: location[1],
+                      xAxisPoint: api.coord([api.value(0), 0]),
+                    },
+                    style: {
+                      fill: color,
+                    },
+                  },
+                  {
+                    type: "CubeTop",
+                    shape: {
+                      api,
+                      xValue: api.value(0),
+                      yValue: api.value(1),
+                      x: location[0],
+                      y: location[1],
+                      xAxisPoint: api.coord([api.value(0), 0]),
+                    },
+                    style: {
+                      fill: color,
+                    },
+                  },
+                ],
+              };
+            },
+            data: yData,
+          },
+          {
+            type: "bar",
+            label: {
+              normal: {
+                show: true,
+                position: "top",
+                fontSize: 12,
+                color: "skyblue",
+                offset: [2, -25],
+              },
+            },
+            itemStyle: {
+              color: "transparent",
+            },
+            tooltip: {},
+            data: MAX,
+          },
+        ],
+      };
+      // 循环高亮展示
+      let currentIndex = -1;
+      let len = option.series[0].data.length;
+      setInterval(() => {
+        // 取消之前高亮的图形
+        myChart.dispatchAction({
+          type: "downplay",
+          seriesIndex: 0,
+          dataIndex: currentIndex,
+        });
+        currentIndex = (currentIndex + 1) % len;
+        // 高亮当前图形
+        myChart.dispatchAction({
+          type: "highlight",
+          seriesIndex: 0,
+          dataIndex: currentIndex,
+        });
+        // 显示 tooltip
+        myChart.dispatchAction({
+          type: "showTip",
+          seriesIndex: 0,
+          dataIndex: currentIndex,
+        });
+      }, 2000);
+
+      if (option && typeof option === "object") {
+        myChart.setOption(option);
+      }
+    };
+    renderChart(myChart);
+  </script>
+</html>

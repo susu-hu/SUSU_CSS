@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.小球跷跷板</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --color: orange;
+      --bg: #f3e8e8;
+    }
+    .loading {
+      position: relative;
+      width: 200px;
+      height: 10px;
+      border-radius: 30px;
+      /* 渐变背景 */
+      background: linear-gradient(
+        45deg,
+        var(--color) 25%,
+        var(--bg) 0,
+        var(--bg) 50%,
+        var(--color) 0,
+        var(--color) 75%,
+        var(--bg) 0
+      );
+      /* 设置bgsize */
+      background-size: 10px 10px;
+      /* 添加动画 */
+      animation: down 3s infinite ease-in-out alternate;
+    }
+    .circle {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #fff;
+      bottom: 15px;
+      right: 0;
+      /* 添加动画 */
+      animation: circle 3s infinite ease-in-out alternate;
+    }
+    .circle::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      top: 15px;
+      right: 15px;
+      background: #000;
+    }
+    @keyframes down {
+      0% {
+        transform: rotate(-15deg);
+      }
+      100% {
+        transform: rotate(15deg);
+      }
+    }
+    @keyframes circle {
+      0% {
+        transform: rotate(1turn);
+        right: 0;
+      }
+      100% {
+        transform: rotate(0deg);
+        right: calc(100% - 50px);
+      }
+    }
+  </style>
+  <body>
+    <div class="loading">
+      <span class="circle"></span>
+    </div>
+  </body>
+</html>

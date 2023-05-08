@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --color: #8fc5de;
+      --color-iner: #6891a5;
+    }
+    .loading {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      /* groove 定义3D凹槽边框 */
+      border: 15px groove var(--color);
+      animation: rotate 1s ease-in-out alternate infinite;
+    }
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(-1turn);
+      }
+    }
+    .loading-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      /* inset 定义3D inset边框 */
+      border: 0px inset var(--color-iner);
+      animation: inner 1s infinite ease-in-out alternate;
+    }
+    @keyframes inner {
+      0% {
+        border-width: 0px;
+      }
+      100% {
+        border-width: 20px;
+      }
+    }
+    .loading-inner p {
+      font-size: 18px;
+      color: transparent;
+      background: linear-gradient(180deg, #fff 0%, #53dfca 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: inner-text 1s infinite ease-in-out alternate;
+    }
+    @keyframes inner-text {
+      0% {
+        transform: rotate(-1turn);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+  </style>
+  <body>
+    <div class="loading">
+      <div class="loading-inner flex-column j_c">
+        <p>加载中...</p>
+      </div>
+    </div>
+  </body>
+</html>

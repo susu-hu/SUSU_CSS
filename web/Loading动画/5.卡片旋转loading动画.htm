@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --c1: #d8784b;
+      --c2: #f8dfe3;
+      --c3: #afcbe4;
+      --c4: #c9afe3;
+    }
+    .loading {
+      position: relative;
+      width: 90px;
+      height: 180px;
+      /* 视距 */
+      transform: perspective(1000px) rotateY(-45deg);
+      /* 保留3d效果 */
+      transform-style: preserve-3d;
+    }
+    .loading::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 50px;
+      background: #000;
+      left: 0;
+      bottom: -60px;
+      filter: blur(30px);
+      transform: rotateX(90deg);
+    }
+    .loading-box {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      /* 保留3d效果 */
+      transform-style: preserve-3d;
+      /* 添加旋转动画 */
+      animation: rotate 5s linear infinite;
+    }
+    .loading-box-item {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      border-radius: 10px;
+      background: var(--c);
+      transform: rotateX(var(--r));
+    }
+    @keyframes rotate {
+      0% {
+        transform: perspective(1000px) rotateX(0deg);
+      }
+      100% {
+        transform: perspective(1000px) rotateX(1turn);
+      }
+    }
+  </style>
+  <body>
+    <div class="loading">
+      <div class="loading-box">
+        <span class="loading-box-item" style="--c: var(--c1); --r: 0deg"></span>
+        <span
+          class="loading-box-item"
+          style="--c: var(--c2); --r: 45deg"
+        ></span>
+        <span
+          class="loading-box-item"
+          style="--c: var(--c3); --r: 90deg"
+        ></span>
+        <span
+          class="loading-box-item"
+          style="--c: var(--c4); --r: 135deg"
+        ></span>
+      </div>
+    </div>
+  </body>
+</html>

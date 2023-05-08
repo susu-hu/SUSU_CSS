@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.3d柱状图与折线图</title>
+    <link rel="stylesheet" href="../common.css" />
+    <style>
+      body {
+        background: linear-gradient(225deg, #95a4b6, #d9e1eba3);
+      }
+      .container {
+        width: 700px;
+        height: 500px;
+        padding: 20px;
+        border-radius: 20px;
+        background: linear-gradient(225deg, #95a4b6, #d9e1eba3);
+        box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .chart {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <script
+      type="text/javascript"
+      src="https://fastly.jsdelivr.net/npm/echarts@5.3.1-rc.1/dist/echarts.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="chart" id="chart"></div>
+    </div>
+  </body>
+  <script>
+    const dom = document.getElementById("chart");
+    const myChart = echarts.init(dom);
+    let t = 0;
+    let color = [
+      "#EB7A6A",
+      "#4FED7D",
+      "#47D8E1",
+      "#E1CD47",
+      "#4F5AED",
+      "#E19D47",
+    ];
+    let icon =
+      "path://M675.711586 848.029728l-186.277248-105.922357c-29.21996-18.262475-51.134931-3.652495-51.134931 29.219961v98.617366H146.099802c-51.134931 0-91.312376-40.177446-91.312376-91.312376V263.630519c0-51.134931 40.177446-91.312376 91.312376-91.312377h175.319763V121.183212H146.099802C69.397406 121.183212 3.652495 183.275627 3.652495 263.630519v515.001803c0 76.702396 65.744911 142.447307 142.447307 142.447307h295.8521V986.82454c0 32.872456 21.91497 47.482436 51.134931 29.219961l160.709782-94.964872h7.30499V913.774639l18.262476-10.957485c25.567465-14.60998 25.567465-40.177446-3.652495-54.787426M1070.181052 121.183212h-255.674654V37.175825c0-32.872456-21.91497-47.482436-51.134931-29.21996l-186.277248 105.922356c-29.21996 18.262475-29.21996 43.829941 0 58.439921l186.277248 109.574852c29.21996 18.262475 51.134931 3.652495 51.134931-29.21996V168.665647h255.674654c51.134931 0 91.312376 40.177446 91.312376 91.312377v515.001803c0 51.134931-40.177446 91.312376-91.312376 91.312376h-135.142317v51.134931h135.142317c76.702396 0 142.447307-62.092416 142.447307-142.447307V256.325529c0-73.049901-62.092416-135.142317-142.447307-135.142317";
+    let dataset = {
+      dimensions: ["日期", "test", "test2"],
+      source: [
+        { 日期: "1月1日", test: 1523, test2: 1111 },
+        { 日期: "1月2日", test: 1223, test2: 8611 },
+        { 日期: "1月3日", test: 2123, test2: 2311 },
+        { 日期: "1月4日", test: 4123, test2: 2411 },
+        { 日期: "1月5日", test: 3123, test2: 1111 },
+        { 日期: "1月6日", test: 7123, test2: 3111 },
+      ],
+    };
+    function solve_xData() {
+      const x = [];
+      for (let i = 0; i < dataset.source.length; i++) {
+        x.push(dataset.source[i][dataset.dimensions[0]]);
+      }
+      return x;
+    }
+
+    let type = "bar3D"; // bar3D、line3D
+    function solve_series() {
+      const s = [];
+      for (let i = 1; i < dataset.dimensions.length; i++) {
+        const data = [];
+        for (let j = 0; j < dataset.source.length; j++) {
+          data.push(dataset.source[j][dataset.dimensions[i]]);
+        }
+        s.push({
+          name: dataset.dimensions[i],
+          type: type,
+          data: data.map(function (item, index) {
+            return {
+              value: [index, i - 1, item],
+              itemStyle: {
+                color: color[index],
+              },
+            };
+          }),
+          shading: "lambert",
+          label: {
+            textStyle: {
+              fontSize: 16,
+              borderWidth: 1,
+            },
+          },
+          lineStyle: {
+            width: 3,
+          },
+          emphasis: {
+            label: {
+              textStyle: {
+                fontSize: 20,
+                color: "yellow",
+              },
+            },
+          },
+        });
+        if (type == "line3D") {
+          s.push({
+            name: dataset.dimensions[i],
+            type: "scatter3D",
+            data: data.map(function (item, index) {
+              return {
+                value: [index, i - 1, item],
+                itemStyle: {
+                  color: color[index],
+                },
+              };
+            }),
+            label: {
+              show: true,
+              textStyle: {
+                color: "red",
+                borderWidth: 0,
+                borderColor: "#c6c6c6",
+                backgroundColor: "transparent",
+              },
+            },
+          });
+        }
+      }
+      return s;
+    }
+    function max() {
+      let s = [];
+      for (let i = 1; i < dataset.dimensions.length; i++) {
+        for (let j = 0; j < dataset.source.length; j++) {
+          s.push(dataset.source[j][dataset.dimensions[i]]);
+        }
+      }
+      return Math.max.apply(null, s) + Math.min.apply(null, s);
+    }
+    let yData = dataset.dimensions.slice(1);
+    //渲染图表
+    const renderChart = (myChart) => {
+      const options = {
+        color: color,
+        grid: {
+          left: "0%", //图表距边框的距离
+          right: "3%",
+          top: "0%",
+          bottom: "10%",
+          containLabel: true,
+        },
+        tooltip: {
+          formatter: function (params) {
+            let xIndex = params.value[0];
+            let tip = params.seriesName + ": " + params.value[2];
+            return (
+              dataset.source[xIndex][dataset.dimensions[0]] +
+              "<br />" +
+              params.marker +
+              tip
+            );
+          },
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            myTool: {
+              //自定义方法 配置   我这是为了实现 饼图切换为柱状图
+              show: true,
+              title: "切换类型",
+              icon: icon,
+              onclick: function () {
+                t++;
+                if (t % 2) {
+                  type = "line3D";
+                } else {
+                  type = "bar3D";
+                }
+
+                options.series = solve_series();
+                myChart.setOption(options, true);
+              },
+            },
+          },
+          left: 20,
+          top: 20,
+        },
+        legend: {},
+        visualMap: {
+          show: false,
+          max: max(),
+        },
+        xAxis3D: {
+          nameGap: 1,
+          type: "category",
+          data: solve_xData(),
+        },
+        yAxis3D: {
+          name: "",
+          type: "category",
+          data: yData,
+        },
+        zAxis3D: {
+          name: "",
+          type: "value",
+        },
+        grid3D: {
+          //   boxWidth: 200,
+          //   boxDepth: 40,
+          //   viewControl: {
+          //     alpha: 45,
+          //     beta: 20,
+          //   },
+        },
+        series: solve_series(),
+      };
+      if (options && typeof options === "object") {
+        myChart.setOption(options);
+      }
+    };
+    renderChart(myChart);
+  </script>
+</html>

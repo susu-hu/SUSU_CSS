@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.扫描loading动画</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --baseColor: #787878;
+      --bx-in: #454344;
+      --wave: skyblue;
+      --wave-line: #fff;
+    }
+    body {
+      background: var(--baseColor);
+    }
+    .loading {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      box-shadow: -18px 18px 36px #666666, 18px -18px 36px #8a8a8a,
+        inset -5px -5px 45px var(--bx-in);
+      position: relative;
+      /* 溢出隐藏 */
+      overflow: hidden;
+    }
+    /* 合并代码 */
+    .loading::before,
+    .loading::after {
+      content: "";
+      position: absolute;
+      border: 1px dashed #fff;
+      border-radius: 50%;
+    }
+    .loading::before {
+      inset: 20px;
+      box-shadow: inset -5px -5px 45px var(--bx-in);
+    }
+    .loading::after {
+      inset: 65px;
+      box-shadow: inset - 5px -5px 25px var(--bx-in);
+    }
+    .loading span {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      left: 50%;
+      top: 50%;
+      border-top: 1px dashed var(--wave-line);
+      /* 添加动画 */
+      animation: rotate 2s linear infinite;
+      /* 添加transform-origin */
+      transform-origin: 0 0;
+    }
+    .loading span::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: var(--wave);
+      /* 旋转一定的角度 */
+      transform: rotate(-45deg);
+      /* 添加transform-origin */
+      transform-origin: 0 0;
+      /* 添加filter滤镜 */
+      filter: blur(30px) drop-shadow(20px 20px 20px var(--wave));
+    }
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(1turn);
+      }
+    }
+  </style>
+  <body>
+    <div class="loading"><span></span></div>
+  </body>
+</html>

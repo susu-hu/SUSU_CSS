@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>1.半圆弧相交loading动画</title>
+  </head>
+  <link rel="stylesheet" type="text/css" href="../common.css" />
+  <body>
+    <section>
+      <div class="loading">
+        <div class="line" style="--d: -0.8s; --ani: rotate1"></div>
+        <div class="line" style="--d: -0.4s; --ani: rotate2"></div>
+        <div class="line" style="--d: -0s; --ani: rotate3"></div>
+      </div>
+    </section>
+  </body>
+  <style type="text/css">
+    :root {
+      --color: rgba(255, 165, 0, 1);
+    }
+
+    .loading {
+      position: relative;
+      width: 8rem;
+      height: 8rem;
+      transform-style: preserve-3d;
+      perspective: 40rem;
+      pointer-events: none;
+    }
+
+    .loading .line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border-bottom: 0.15rem solid var(--color);
+      animation: var(--ani) 1.15s linear infinite;
+      animation-delay: var(--d);
+    }
+
+    @keyframes rotate1 {
+      0% {
+        transform: rotateX(35deg) rotateY(-45deg) rotate(0);
+      }
+
+      to {
+        transform: rotateX(35deg) rotateY(-45deg) rotate(1turn);
+      }
+    }
+    @keyframes rotate2 {
+      0% {
+        transform: rotateX(50deg) rotateY(10deg) rotate(0);
+      }
+
+      to {
+        transform: rotateX(50deg) rotateY(10deg) rotate(1turn);
+      }
+    }
+    @keyframes rotate3 {
+      0% {
+        transform: rotateX(35deg) rotateY(55deg) rotate(0);
+      }
+
+      to {
+        transform: rotateX(35deg) rotateY(55deg) rotate(1turn);
+      }
+    }
+  </style>
+</html>
