@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>雷达图</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.1/echarts.min.js"></script>
+    <link rel="stylesheet" href="../common.css" />
+    <style>
+      body {
+        background: #ddcaa4;
+      }
+
+      .container {
+        width: 600px;
+        height: 400px;
+        padding: 40px;
+        border-radius: 20px;
+        background: linear-gradient(225deg, #edc58f, #dfddc9);
+        box-shadow: -25px 25px 45px rgba(0, 0, 0, 0.3),
+          25px -25px 45px rgba(0, 0, 0, 0.3);
+      }
+
+      .chart {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="chart" id="chart"></div>
+    </div>
+  </body>
+  <script>
+    const dom = document.getElementById("chart");
+    const myChart = echarts.init(dom);
+    //渲染图表
+    const renderChart = (myChart) => {
+      const options = {
+        backgroundColor: "transparent", //背景色透明
+        tooltip: {},
+        grid: {
+          left: "0%", //图表距边框的距离
+          right: "3%",
+          top: "11%",
+          bottom: "2%",
+          containLabel: true,
+        },
+        radar: {
+          radius: "80%", //大小
+          nameGap: 10, // 图中工艺等字距离图的距离
+          center: ["50%", "50%"], // 图的位置
+          name: {
+            textStyle: {
+              color: "#333",
+              fontSize: 14,
+            },
+            formatter: function (name) {
+              return name;
+            },
+          },
+          indicator: [
+            { name: "投稿", max: "100" },
+            { name: "播放", max: "200" },
+            { name: "弹幕", max: "300" },
+            { name: "点赞", max: "100" },
+            { name: "关注", max: "200" },
+            { name: "收藏", max: "400" },
+          ],
+          axisLine: {
+            lineStyle: {
+              color: "rgba(51, 51, 51,0.5)",
+            },
+          },
+          splitArea: {
+            show: true,
+            areaStyle: {
+              color: "rgba(255,0,0,0)", // 图表背景的颜色
+            },
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              width: 1,
+              color: "rgba(51, 51, 51,0.5)", // 设置网格的颜色
+            },
+          },
+        },
+        series: [
+          {
+            name: "表现总结",
+            type: "radar",
+            symbol: "angle",
+            itemStyle: {
+              normal: {
+                areaStyle: { type: "default" },
+              },
+            },
+            data: [
+              {
+                symbol: "circle",
+                symbolSize: 5,
+                value: [70, 142, 60, 84, 140, 300],
+                areaStyle: {
+                  color: "rgba(51, 51, 51,0.5)",
+                },
+                itemStyle: {
+                  normal: {
+                    borderWidth: 1,
+                    color: "#edc58f", //圆点颜色-与背景色一致
+                    borderColor: "orange", //圆点边框色
+                  },
+                },
+                lineStyle: {
+                  color: "orange", //曲线连接边框色
+                  width: 1,
+                },
+              },
+            ],
+          },
+        ],
+      };
+      if (options && typeof options === "object") {
+        myChart.setOption(options);
+      }
+    };
+    renderChart(myChart);
+  </script>
+</html>
