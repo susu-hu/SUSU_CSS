@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.文字大小自适应</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    input {
+      padding: 10px;
+      margin-top: 20px;
+      border: 1px solid #333;
+      font-size: 20px;
+      width: 200px;
+      text-align: center;
+      transition: all 200ms linear;
+    }
+  </style>
+  <body>
+    <section class="flex-column">
+      <h1>在输入框中输入文字</h1>
+      <input type="text" id="Input" />
+    </section>
+  </body>
+  <script>
+    window.onload = function () {
+      var afs = document.getElementById("Input");
+      afs.onchange =
+        afs.onkeyup =
+        afs.onkeydown =
+        afs.oninput =
+        afs.onfocus =
+        afs.onblur =
+          function () {
+            var len = 0,
+              word = 0;
+            for (var i = 0; i < this.value.length; i++) {
+              if (this.value[i].match(/[^\x00-\xff]/gi) != null) {
+                len += 2;
+              } else {
+                len += 1;
+              }
+              word++;
+            }
+            if (len <= 16) {
+              this.style.fontSize = 168 / 8 + "px";
+            }
+            if (len > 16 && len <= 20) {
+              this.style.fontSize = 168 / 10 + "px";
+            }
+            if (len > 20 && len <= 24) {
+              this.style.fontSize = 168 / 12 + "px";
+            }
+            if (len > 24 && len <= 28) {
+              this.style.fontSize = 168 / 14 + "px";
+            }
+            if (len > 28) {
+              --word;
+              this.value = this.value.substr(0, word);
+            }
+          };
+    };
+  </script>
+</html>
