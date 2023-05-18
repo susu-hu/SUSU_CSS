@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.背景毛玻璃效果</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --bg: #0a243e;
+    }
+    body {
+      background-color: #fff;
+      background-image: radial-gradient(var(--bg) 9px, transparent 10px),
+        repeating-radial-gradient(
+          var(--bg) 0,
+          var(--bg) 4px,
+          transparent 5px,
+          transparent 20px,
+          var(--bg) 21px,
+          var(--bg) 25px,
+          transparent 26px,
+          transparent 50px
+        );
+      background-size: 100px 100px, 90px 90px;
+      background-position: 0 0;
+    }
+    .box {
+      position: fixed;
+      padding: 50px 30px;
+      background: rgba(16, 68, 75, 0.3);
+      box-shadow: 0px 3px 7px 2px rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      border: 1px solid rgba(126, 145, 169, 1);
+      backdrop-filter: blur(10px);
+      line-height: 28px;
+      color: #0a243e;
+    }
+  </style>
+  <body>
+    <div class="box" id="box">
+      <p><strong>目的：</strong></p>
+      <p>
+        为一个元素后面区域添加图形效果（如模糊或颜色偏移），适用于元素背后的所有元素
+      </p>
+      <p><strong>满足条件:</strong></p>
+      <p>为了看到效果，必须使元素或其背景至少部分透明</p>
+    </div>
+  </body>
+  <script>
+    const el = document.getElementById("box");
+    el.onmousedown = (e) => {
+      // 算出鼠标相对元素的位置
+      let disX = e.clientX - el.offsetLeft;
+      let disY = e.clientY - el.offsetTop;
+      document.onmousemove = (e) => {
+        // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+        el.style.left = e.clientX - disX + "px";
+        el.style.top = e.clientY - disY + "px";
+      };
+      document.onmouseup = (e) => {
+        document.onmousemove = null;
+        document.onmouseup = null;
+      };
+    };
+  </script>
+</html>
