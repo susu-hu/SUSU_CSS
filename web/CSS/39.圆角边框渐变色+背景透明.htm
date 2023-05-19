@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>39.圆角边框渐变色+背景透明</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    :root {
+      --border-radius: 16px;
+      --border-width: 2px;
+      --border-color: linear-gradient(
+        270deg,
+        rgba(69, 83, 100, 1),
+        rgba(126, 145, 169, 1),
+        rgba(69, 83, 100, 1)
+      );
+    }
+    body {
+      background-image: linear-gradient(
+          90deg,
+          rgba(50, 0, 0, 0.25) 3%,
+          rgba(0, 0, 0, 0) 3%
+        ),
+        linear-gradient(360deg, rgba(50, 0, 0, 0.25) 3%, rgba(0, 0, 0, 0) 3%);
+      background-size: 20px 20px;
+      background-position: center center;
+    }
+    button {
+      width: 300px;
+      height: 130px;
+      position: relative;
+      background: rgba(38, 70, 93, 0.2);
+      color: #fff;
+      font-size: 28px;
+      border-radius: var(--border-radius);
+      transition: all 0.5s ease-in-out;
+      backdrop-filter: blur(10px);
+    }
+
+    button::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      padding: var(--border-width);
+      border-radius: var(--border-radius);
+      background: var(--border-color);
+      /* 随便定义颜色 */
+      --mask-bg: linear-gradient(red, red);
+      --m-o: content-box, padding-box;
+      /* mask允许使用者通过遮罩或者裁切特定区域的图片的方式来隐藏一个元素的部分或者全部可见区域 */
+      /* 设置了用作元素蒙版层的图像，默认值为none，值为透明图片，或透明渐变 */
+      -webkit-mask-image: var(--mask-bg), var(--mask-bg);
+      /* 默认值为border-box，可选值与background-origin相同 */
+      -webkit-mask-origin: var(--m-o);
+      /* 默认值为border-box，可选值与background-clip相同 */
+      -webkit-mask-clip: var(--m-o);
+      /* exclude排除，只显示不重合的地方,Firefox支持4个属性 */
+      mask-composite: exclude;
+      /*只显示下方遮罩，重合的地方不显示*/
+      -webkit-mask-composite: destination-out;
+    }
+    button:hover {
+      filter: brightness(1.5);
+    }
+  </style>
+  <body>
+    <button>苏苏_icon</button>
+  </body>
+</html>
