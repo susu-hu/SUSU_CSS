@@ -19,6 +19,7 @@
       );
     }
     body {
+      background: #222;
       background-image: linear-gradient(
           90deg,
           rgba(50, 0, 0, 0.25) 3%,
@@ -32,14 +33,13 @@
       width: 300px;
       height: 130px;
       position: relative;
-      background: rgba(38, 70, 93, 0.2);
       color: #fff;
       font-size: 28px;
       border-radius: var(--border-radius);
       transition: all 0.5s ease-in-out;
+      background: rgba(38, 70, 93, 0.2);
       backdrop-filter: blur(10px);
     }
-
     button::after {
       content: "";
       position: absolute;
@@ -50,19 +50,20 @@
       padding: var(--border-width);
       border-radius: var(--border-radius);
       background: var(--border-color);
-      /* 随便定义颜色 */
+      /* 随便定义一个颜色 */
       --mask-bg: linear-gradient(red, red);
-      --m-o: content-box, padding-box;
+      /* 类似background-clip */
+      --mask-clip: content-box, padding-box;
       /* mask允许使用者通过遮罩或者裁切特定区域的图片的方式来隐藏一个元素的部分或者全部可见区域 */
-      /* 设置了用作元素蒙版层的图像，默认值为none，值为透明图片，或透明渐变 */
+      /* mask-image类似background-image 设置了用作元素蒙版层的图像，默认值为none，值为透明图片，或透明渐变 */
       -webkit-mask-image: var(--mask-bg), var(--mask-bg);
       /* 默认值为border-box，可选值与background-origin相同 */
-      -webkit-mask-origin: var(--m-o);
-      /* 默认值为border-box，可选值与background-clip相同 */
-      -webkit-mask-clip: var(--m-o);
+      -webkit-mask-origin: var(--mask-clip);
+      /* 默认值为border-box，可选值与background-origin相同 */
+      -webkit-mask-clip: var(--mask-clip);
       /* exclude排除，只显示不重合的地方,Firefox支持4个属性 */
       mask-composite: exclude;
-      /*只显示下方遮罩，重合的地方不显示*/
+      /* 只显示下方遮罩，重合的地方不显示 */
       -webkit-mask-composite: destination-out;
     }
     button:hover {
