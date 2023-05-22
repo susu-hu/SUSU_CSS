@@ -9,15 +9,15 @@
   <link rel="stylesheet" href="../common.css" />
   <style>
     section {
-      width: 430px;
+      width: 460px;
     }
     div {
       cursor: pointer;
       position: relative;
       width: 180px;
       height: 60px;
-      margin-bottom: 10px;
-      margin-right: 10px;
+      margin-bottom: 20px;
+      margin-right: 20px;
       font-size: 15px;
       color: #e2fffd;
       transition: all 0.5s ease-in-out;
@@ -30,6 +30,7 @@
       --bg: linear-gradient(180deg, #346575 0%, #1a283b 100%);
       --border: linear-gradient(270deg, #455364, #aec9e9, #455364);
       border: 1px solid transparent;
+      /* var(--bg)背景色  var(--border)边框色 */
       background-image: var(--bg), var(--border);
       background-origin: border-box;
       background-clip: content-box, border-box;
@@ -95,8 +96,6 @@
       /* mask允许使用者通过遮罩或者裁切特定区域的图片的方式来隐藏一个元素的部分或者全部可见区域 */
       /* mask-image类似background-image 设置了用作元素蒙版层的图像，默认值为none，值为透明图片，或透明渐变 */
       -webkit-mask-image: var(--mask-bg), var(--mask-bg);
-      /* 默认值为border-box，可选值与background-origin相同 */
-      -webkit-mask-origin: var(--mask-clip);
       /* 默认值为border-box，可选值与background-origin相同 */
       -webkit-mask-clip: var(--mask-clip);
       /* exclude排除，只显示不重合的地方,Firefox支持4个属性 */
