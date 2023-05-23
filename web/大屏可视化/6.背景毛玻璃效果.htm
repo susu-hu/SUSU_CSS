@@ -31,25 +31,24 @@
       position: fixed;
       padding: 50px 30px;
       background: rgba(16, 68, 75, 0.3);
-      box-shadow: 0px 3px 7px 2px rgba(0, 0, 0, 0.5);
       border-radius: 8px;
-      border: 1px solid rgba(126, 145, 169, 1);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 3px 7px 2px rgba(0, 0, 0, 0.5);
       line-height: 28px;
       color: #0a243e;
+      /* 添加backdrop-filter */
+      backdrop-filter: blur(10px);
     }
   </style>
   <body>
     <div class="box" id="box">
-      <p><strong>目的：</strong></p>
-      <p>
-        为一个元素后面区域添加图形效果（如模糊或颜色偏移），适用于元素背后的所有元素
-      </p>
+      <p><strong>目的:</strong></p>
+      <p>为一个元素后面区域添加图形效果（如模糊或颜色偏移）</p>
       <p><strong>满足条件:</strong></p>
       <p>为了看到效果，必须使元素或其背景至少部分透明</p>
     </div>
   </body>
   <script>
+    // 拖拽元素，看效果
     const el = document.getElementById("box");
     el.onmousedown = (e) => {
       // 算出鼠标相对元素的位置
