@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>40.圆角边框渐变色的多种实现</title>
+  </head>
+  <link rel="stylesheet" href="../common.css" />
+  <style>
+    div {
+      cursor: pointer;
+      position: relative;
+      width: 180px;
+      height: 60px;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #e2fffd;
+      --bg: linear-gradient(180deg, #346575 0%, #1a283b 100%);
+      --border: linear-gradient(270deg, #455364, #aec9e9, #455364);
+      border: 1px solid transparent;
+      background-image: var(--bg), var(--border);
+      background-origin: border-box;
+      background-clip: content-box, border-box;
+      transition: all 0.5s ease-in-out;
+    }
+    div:hover {
+      filter: brightness(1.3);
+    }
+  </style>
+
+  <body>
+    <section>
+      <div class="flex-column j_c">background-clip</div>
+    </section>
+  </body>
+</html>
