@@ -12,25 +12,30 @@
     section {
       cursor: default;
     }
-    section:hover .title {
+    /* section:hover .title {
       font-size: 48px;
-    }
+    } */
     .title {
-      display: flex;
-      font-size: 44px;
+      /* display: flex; 导致text-align失效*/
+      font-size: 0;
       font-family: YouSheBiaoTiHei;
       line-height: 57px;
       background: linear-gradient(180deg, #d0dae2 0%, #ffffff 100%);
       background-clip: text;
       -webkit-background-clip: text;
+      /* 最后一行不生效 */
       text-align: justify;
+      /* text-align-last最后一行，兼容性不好 */
       text-align-last: justify;
       position: relative;
       margin-bottom: 10px;
       transition: all 0.5s ease-in-out;
       -webkit-text-fill-color: transparent;
     }
-    .title::before {
+    .title span {
+      font-size: 44px;
+    }
+    /* .title::before {
       content: attr(data-title);
       position: absolute;
       left: 0;
@@ -38,7 +43,7 @@
       width: 100%;
       z-index: -1;
       text-shadow: 0px 2px 4px rgba(214, 107, 49, 0.5);
-    }
+    } */
     .title::after {
       content: "";
       position: absolute;
@@ -73,13 +78,15 @@
       或者有些浏览器对于font-size:12px;的支持不友好(Trible Kill)-->
     <!-- 3.float,不好，还要清除浮动-->
     <!-- 4.父元素使用 flex 布局 -->
+    <!-- align-last：这个属性规定如何对齐文本的最后一行，但是这只有在text-align为justify的时候才起作用，直接设置text-align-last：justify就可以控制最后一行文本的对齐方式，但是这个方法兼容性相当的差，不建议使用。 -->
     <section>
       <p class="title" id="title">
         <span id="item1"></span>
         <span id="item2"></span>
       </p>
       <p class="en-title">
-        SHARP TOOLS MAKES GODD WORK (Never too old to learn)
+        SHARP TOOLS MAKES GODD WORK (Never too old to
+        learn)suildfhwsdsdfjhsdkjfsdfsdfsd
       </p>
     </section>
   </body>
