@@ -9,13 +9,17 @@
   <link rel="stylesheet" href="../common.css" />
   <link rel="stylesheet" href="../fonts/font.css" />
   <style>
+    section {
+      cursor: default;
+    }
+    section:hover .title {
+      font-size: 48px;
+    }
     .title {
       display: flex;
       font-size: 44px;
       font-family: YouSheBiaoTiHei;
-      color: #ffffff;
       line-height: 57px;
-      text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
       background: linear-gradient(180deg, #d0dae2 0%, #ffffff 100%);
       background-clip: text;
       -webkit-background-clip: text;
@@ -23,6 +27,17 @@
       text-align-last: justify;
       position: relative;
       margin-bottom: 10px;
+      transition: all 0.5s ease-in-out;
+      -webkit-text-fill-color: transparent;
+    }
+    .title::before {
+      content: attr(data-title);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: -1;
+      text-shadow: 0px 2px 4px rgba(214, 107, 49, 0.5);
     }
     .title::after {
       content: "";
@@ -59,7 +74,7 @@
     <!-- 3.float,不好，还要清除浮动-->
     <!-- 4.父元素使用 flex 布局 -->
     <section>
-      <p class="title">
+      <p class="title" id="title">
         <span id="item1"></span>
         <span id="item2"></span>
       </p>
@@ -72,6 +87,8 @@
     const title = "工欲善其事必先利其器";
     const dom1 = document.getElementById("item1");
     const dom2 = document.getElementById("item2");
+    const titleBox = document.getElementById("title");
+    titleBox.dataset.title = title;
     dom1.innerHTML = title.slice(0, -1);
     dom2.innerHTML = title.slice(-1);
   </script>
