@@ -12,9 +12,6 @@
     section {
       cursor: default;
     }
-    section:hover .title {
-      font-size: 48px;
-    }
     .title {
       /* display: flex; 导致text-align失效*/
       font-family: YouSheBiaoTiHei;
@@ -29,7 +26,8 @@
       text-align-last: justify;
       position: relative;
       margin-bottom: 10px;
-      -webkit-text-fill-color: transparent; transition: all 0.5s ease-in-out;
+      -webkit-text-fill-color: transparent; 
+      transition: all 0.5s ease-in-out;
     }
     .title::before {
       content: attr(data-title);
@@ -38,7 +36,8 @@
       bottom: 0;
       width: 100%;
       z-index: -1;
-      text-shadow: 0px 2px 4px rgba(191, 24, 83, 0.8);
+      text-shadow: 0px 2px 4px #000; 
+      transition: all 0.5s ease-in-out;
     }
     .title::after {
       content: "";
@@ -65,6 +64,12 @@
       font-family: "D-DIN";
       text-align: justify;
       text-align-last: justify;
+    }
+    section:hover .title {
+      font-size: 48px;
+    }
+    section:hover .title::before{
+      text-shadow: 0px 2px 4px rgb(204, 89, 17);
     }
   </style>
   <body>
