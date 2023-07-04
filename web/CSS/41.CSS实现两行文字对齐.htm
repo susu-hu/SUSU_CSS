@@ -1,102 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>41.CSS实现两行文字对齐</title>
-  </head>
-  <link rel="stylesheet" href="../common.css" />
-  <link rel="stylesheet" href="../fonts/font.css" />
-  <style>
-    section {
-      cursor: default;
-    }
-    .title {
-      /* display: flex; 导致text-align失效*/
-      font-family: YouSheBiaoTiHei;
-      font-size: 44px;
-      line-height: 57px;
-      background: linear-gradient(180deg, #d0dae2 0%, #ffffff 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      /* 最后一行不生效 */
-      text-align: justify;
-      /* text-align-last最后一行，兼容性不好 */
-      text-align-last: justify;
-      position: relative;
-      margin-bottom: 10px;
-      -webkit-text-fill-color: transparent; 
-      transition: all 0.5s ease-in-out;
-    }
-    .title::before {
-      content: attr(data-title);
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      z-index: -1;
-      text-shadow: 0px 2px 4px #000; 
-      transition: all 0.5s ease-in-out;
-    }
-    .title::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(
-        270deg,
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>41.CSS实现两行文字对齐</title>
+</head>
+<link rel="stylesheet" href="../common.css" />
+<link rel="stylesheet" href="../fonts/font.css" />
+<style>
+  section {
+    cursor: default;
+  }
+
+  .title {
+    /* display: flex; 导致text-align失效*/
+    font-family: YouSheBiaoTiHei;
+    font-size: 44px;
+    line-height: 57px;
+    background: linear-gradient(180deg, #d0dae2 0%, #ffffff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    /* 最后一行不生效 */
+    text-align: justify;
+    /* text-align-last最后一行，兼容性不好 */
+    text-align-last: justify;
+    position: relative;
+    margin-bottom: 10px;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.5s ease-in-out;
+    filter: drop-shadow(0px 2px 4px #000);
+  }
+
+  .title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(270deg,
         rgba(72, 85, 100, 0) 0%,
         #637992 51%,
-        rgba(72, 85, 100, 0) 100%
-      );
-    }
-    .title span:nth-child(1) {
-      letter-spacing: 12px;
-    }
-    .en-title {
-      font-size: 12px;
-      color: #8e939a;
-      line-height: 13px;
-      letter-spacing: 2px;
-      font-family: "D-DIN";
-      text-align: justify;
-      text-align-last: justify;
-    }
-    section:hover .title {
-      font-size: 48px;
-    }
-    section:hover .title::before{
-      text-shadow: 0px 2px 4px rgb(204, 89, 17);
-    }
-  </style>
-  <body>
-    <!-- 换行，让两个span产生了间隙 -->
-    <!-- 1.将代码写一行撒 不好-->
-    <!-- 2.font-size:0; 在给span额外添加font-size ，先是font-size被重写一次（First Blood），再者是一些老版本的浏览器下依旧会有间隙（Double Kill）
+        rgba(72, 85, 100, 0) 100%);
+  }
+
+  .title span:nth-child(1) {
+    letter-spacing: 12px;
+  }
+
+  .en-title {
+    font-size: 12px;
+    color: #8e939a;
+    line-height: 13px;
+    letter-spacing: 2px;
+    font-family: "D-DIN";
+    text-align: justify;
+    text-align-last: justify;
+  }
+
+  section:hover .title {
+    font-size: 48px;
+  }
+
+</style>
+
+<body>
+  <!-- 换行，让两个span产生了间隙 -->
+  <!-- 1.将代码写一行撒 不好-->
+  <!-- 2.font-size:0; 在给span额外添加font-size ，先是font-size被重写一次（First Blood），再者是一些老版本的浏览器下依旧会有间隙（Double Kill）
       或者有些浏览器对于font-size:12px;的支持不友好(Trible Kill)-->
-    <!-- 3.float,不好，还要清除浮动-->
-    <!-- 4.父元素使用 flex 布局 ，局限：可能导致其他属性不生效-->
-    <!-- align-last：这个属性规定如何对齐文本的最后一行，但是这只有在text-align为justify的时候才起作用，直接设置text-align-last：justify就可以控制最后一行文本的对齐方式，但是这个方法兼容性相当的差，不建议使用。 -->
-    <section >
-      <p class="title" id="title">
-        <span id="item1"></span><!--消除间距--><span id="item2"></span>
+  <!-- 3.float,不好，还要清除浮动-->
+  <!-- 4.父元素使用 flex 布局 ，局限：可能导致其他属性不生效-->
+  <!-- align-last：这个属性规定如何对齐文本的最后一行，但是这只有在text-align为justify的时候才起作用，直接设置text-align-last：justify就可以控制最后一行文本的对齐方式，但是这个方法兼容性相当的差，不建议使用。 -->
+  <section>
+    <p class="title" id="title">
+      <span id="item1"></span><!--消除间距--><span id="item2"></span>
       </div>
-      <p class="en-title">
-        SHARP TOOLS MAKES GODD WORK (Never too old to learn)
-      </p>
-    </section>
-  </body>
-  <script>
-    // 标题字数有限制
-    const title = "工欲善其事必先利其器";
+    <p class="en-title">
+      SHARP TOOLS MAKES GODD WORK (Never too old to learn)
+    </p>
+  </section>
+</body>
+<script>
+  // 标题字数有限制
+  const init = (title) => {
     const dom1 = document.getElementById("item1");
     const dom2 = document.getElementById("item2");
     const titleBox = document.getElementById("title");
     titleBox.dataset.title = title;
     dom1.innerHTML = title.slice(0, -1);
     dom2.innerHTML = title.slice(-1);
-  </script>
+  }
+  init('工欲善其事必先利其器');
+  setTimeout(() => {
+    init('天见其明，地见其光，君子贵其全也');
+  }, 2000);
+  setTimeout(() => {
+    init('为者常成，行者常至');
+  },4000)
+</script>
+
 </html>
