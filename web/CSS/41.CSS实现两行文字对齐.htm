@@ -12,13 +12,13 @@
     section {
       cursor: default;
     }
-    /* section:hover .title {
+    section:hover .title {
       font-size: 48px;
-    } */
+    }
     .title {
       /* display: flex; 导致text-align失效*/
-      font-size: 0;
       font-family: YouSheBiaoTiHei;
+      font-size: 44px;
       line-height: 57px;
       background: linear-gradient(180deg, #d0dae2 0%, #ffffff 100%);
       background-clip: text;
@@ -29,21 +29,17 @@
       text-align-last: justify;
       position: relative;
       margin-bottom: 10px;
-      transition: all 0.5s ease-in-out;
-      -webkit-text-fill-color: transparent;
+      -webkit-text-fill-color: transparent; transition: all 0.5s ease-in-out;
     }
-    .title span {
-      font-size: 44px;
-    }
-    /* .title::before {
+    .title::before {
       content: attr(data-title);
       position: absolute;
       left: 0;
       bottom: 0;
       width: 100%;
       z-index: -1;
-      text-shadow: 0px 2px 4px rgba(214, 107, 49, 0.5);
-    } */
+      text-shadow: 0px 2px 4px rgba(191, 24, 83, 0.8);
+    }
     .title::after {
       content: "";
       position: absolute;
@@ -77,20 +73,19 @@
     <!-- 2.font-size:0; 在给span额外添加font-size ，先是font-size被重写一次（First Blood），再者是一些老版本的浏览器下依旧会有间隙（Double Kill）
       或者有些浏览器对于font-size:12px;的支持不友好(Trible Kill)-->
     <!-- 3.float,不好，还要清除浮动-->
-    <!-- 4.父元素使用 flex 布局 -->
+    <!-- 4.父元素使用 flex 布局 ，局限：可能导致其他属性不生效-->
     <!-- align-last：这个属性规定如何对齐文本的最后一行，但是这只有在text-align为justify的时候才起作用，直接设置text-align-last：justify就可以控制最后一行文本的对齐方式，但是这个方法兼容性相当的差，不建议使用。 -->
-    <section>
+    <section >
       <p class="title" id="title">
-        <span id="item1"></span>
-        <span id="item2"></span>
-      </p>
+        <span id="item1"></span><!--消除间距--><span id="item2"></span>
+      </div>
       <p class="en-title">
-        SHARP TOOLS MAKES GODD WORK (Never too old to
-        learn)suildfhwsdsdfjhsdkjfsdfsdfsd
+        SHARP TOOLS MAKES GODD WORK (Never too old to learn)
       </p>
     </section>
   </body>
   <script>
+    // 标题字数有限制
     const title = "工欲善其事必先利其器";
     const dom1 = document.getElementById("item1");
     const dom2 = document.getElementById("item2");
