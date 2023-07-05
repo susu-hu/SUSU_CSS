@@ -12,23 +12,23 @@
 <style>
   section {
     cursor: default;
+    display: inline-block;
+    text-align: justify;
+    /* 最后一行不生效 */
+    text-align-last: justify;
+    /* text-align-last最后一行，兼容问题 */
   }
 
   .title {
-    /* display: flex; 导致text-align失效*/
     font-family: YouSheBiaoTiHei;
     font-size: 44px;
     line-height: 57px;
     background: linear-gradient(180deg, #d0dae2 0%, #ffffff 100%);
     background-clip: text;
     -webkit-background-clip: text;
-    /* 最后一行不生效 */
-    text-align: justify;
-    /* text-align-last最后一行，兼容性不好 */
-    text-align-last: justify;
+    -webkit-text-fill-color: transparent;
     position: relative;
     margin-bottom: 10px;
-    -webkit-text-fill-color: transparent;
     transition: all 0.5s ease-in-out;
     filter: drop-shadow(0px 2px 4px #000);
   }
@@ -56,14 +56,28 @@
     line-height: 13px;
     letter-spacing: 2px;
     font-family: "D-DIN";
-    text-align: justify;
-    text-align-last: justify;
   }
 
   section:hover .title {
     font-size: 48px;
   }
 
+  .line-box {
+    font-size: 40px;
+    font-family: YouSheBiaoTiHei;
+    filter: drop-shadow(0px 2px 4px #000);
+    border: 1px dotted;
+    width: 600px;
+    text-align: justify;
+    height: 52px;
+    display: none;
+  }
+
+  .line-box::after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+  }
 </style>
 
 <body>
@@ -77,11 +91,14 @@
   <section>
     <p class="title" id="title">
       <span id="item1"></span><!--消除间距--><span id="item2"></span>
-      </div>
+    </p>
     <p class="en-title">
       SHARP TOOLS MAKES GODD WORK (Never too old to learn)
     </p>
   </section>
+  <p class="line-box">
+    <span style="letter-spacing: 12px;">这是一段文</span><!--消除间距--><span>字</span>
+  </p>
 </body>
 <script>
   // 标题字数有限制
@@ -99,7 +116,7 @@
   }, 2000);
   setTimeout(() => {
     init('为者常成，行者常至');
-  },4000)
+  }, 4000)
 </script>
 
 </html>
