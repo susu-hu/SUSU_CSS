@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="../common.css">
+<style>
+    .btns {
+        position: absolute;
+        left: 50%;
+        top: 60%;
+        transform: translate(-50%);
+    }
+
+    button {
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        color: #03e9f4;
+        font-size: 16px;
+        overflow: hidden;
+        transition: .5s;
+        letter-spacing: 4px;
+        width: 130px;
+        height: 50px;
+    }
+
+    button:nth-child(2) {
+        margin-left: 30px;
+    }
+
+    button:hover {
+        background: #03e9f4;
+        color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #03e9f4,
+            0 0 25px #03e9f4,
+            0 0 50px #03e9f4,
+            0 0 100px #03e9f4;
+    }
+
+    button span {
+        position: absolute;
+        display: block;
+    }
+
+    button span:nth-child(1) {
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #03e9f4);
+        animation: btn-anim1 1s linear infinite;
+    }
+
+    @keyframes btn-anim1 {
+        0% {
+            left: -100%;
+        }
+
+        50%,
+        100% {
+            left: 100%;
+        }
+    }
+
+    button span:nth-child(2) {
+        top: -100%;
+        right: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(180deg, transparent, #03e9f4);
+        animation: btn-anim2 1s linear infinite;
+        animation-delay: .25s
+    }
+
+    @keyframes btn-anim2 {
+        0% {
+            top: -100%;
+        }
+
+        50%,
+        100% {
+            top: 100%;
+        }
+    }
+
+    button span:nth-child(3) {
+        bottom: 0;
+        right: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(270deg, transparent, #03e9f4);
+        animation: btn-anim3 1s linear infinite;
+        animation-delay: .5s
+    }
+
+    @keyframes btn-anim3 {
+        0% {
+            right: -100%;
+        }
+
+        50%,
+        100% {
+            right: 100%;
+        }
+    }
+
+    button span:nth-child(4) {
+        bottom: -100%;
+        left: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(360deg, transparent, #03e9f4);
+        animation: btn-anim4 1s linear infinite;
+        animation-delay: .75s
+    }
+
+    @keyframes btn-anim4 {
+        0% {
+            bottom: -100%;
+        }
+
+        50%,
+        100% {
+            bottom: 100%;
+        }
+    }
+</style>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="flex-row btns">
+        <button id="button">
+            <span></span> <span></span> <span></span> <span></span>
+            聚拢
+        </button>
+        <button id="btnText">
+            <span></span> <span></span> <span></span> <span></span>
+            复位
+        </button>
+    </div>
+</body>
+<script>
+    const number = 100;
+    const canvas = document.getElementById("canvas");
+    canvas.width = document.body.clientWidth;
+    canvas.height = document.body.clientHeight;
+    const ctx = canvas.getContext("2d");
+    let particles = [], animation = null;
+    function rand(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function initDraw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < number; i++) {
+            let particle = particles[i];
+            particle.op = 1;
+            particle.x = rand(0 + particle.r, canvas.width - particle.r);
+            particle.y = rand(0 + particle.r, canvas.height - particle.r);
+            particle.draw();
+        }
+    }
+    window.onload = () => {
+        if (typeof canvas.getContext === "undefined") {
+            return;
+        }
+        const Particle = function () {
+            this.r = rand(2, 6);
+            this.x = rand(0 + this.r, canvas.width - this.r);
+            this.y = rand(0 + this.r, canvas.height - this.r);
+            this.opacity = Math.random();
+            this.op = 1;
+            this.draw = function () {
+                //通过清空子路径列表开始一个新路径的方法。当你想创建一个新的路径时，调用此方法
+                ctx.beginPath();
+                //绘制圆弧路径的方法
+                // ctx.arc( x, y, radius, startAngle, endAngle, anticlockwise );
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                // createRadialGradient() 方法创建一条放射颜色渐变。
+                //createLinearGradient( xStart, yStart, radiusStart, xEnd, yEnd, radiusEnd )
+                let color = ctx.createRadialGradient(
+                    this.x,
+                    this.y,
+                    this.r * 0.7,
+                    this.x,
+                    this.y,
+                    this.r,
+                );
+                color.addColorStop(0.2, `rgba(166, 255, 240,${this.op})`);
+                color.addColorStop(1, `rgba(255, 255, 255,${this.op})`);
+                ctx.shadowColor = "#A6FFF0";
+                ctx.shadowBlur = this.r * 1.6;
+                ctx.fillStyle = color;
+                ctx.globalAlpha = this.opacity;
+                ctx.closePath();
+                ctx.fill();
+            };
+            this.move = function () {
+                const center = { x: canvas.width / 2, y: canvas.height / 2 },
+                    speed = 0.01,
+                    distance = Math.sqrt(
+                        Math.pow(center.x - this.x, 2) + Math.pow(center.y - this.y, 2),
+                    );
+                if (distance < 10) {
+                    this.x = rand(0 + this.r, canvas.width - this.r);
+                    this.y = rand(0 + this.r, canvas.height - this.r);
+                }
+                this.x += (center.x - this.x) * speed;
+                this.y += (center.y - this.y) * speed;
+            };
+        };
+        for (let i = 0; i < number; i++) {
+            particles.push(new Particle());
+        }
+        initDraw();
+    }
+    const btn = document.getElementById('button'), btnText = document.getElementById('btnText');
+    button.addEventListener('click', () => {
+        updateParticles();
+    });
+    btnText.addEventListener('click', () => {
+        stop();
+    });
+    function updateParticles() {
+        stop();
+        const update = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < number; i++) {
+                let particle = particles[i];
+                particle.draw();
+                particle.move();
+            }
+            animation = window.requestAnimationFrame(update);
+        };
+        update();
+    }
+    function stop() {
+        console.log(animation)
+        window.cancelAnimationFrame(animation); //可以取消该次动画
+        initDraw();
+    }
+</script>
+
+</html>
