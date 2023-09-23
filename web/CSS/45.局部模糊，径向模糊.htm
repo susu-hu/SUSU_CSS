@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 参考：https://www.zhangxinxu.com/study/201904/css-filter-blend/local-blur.php-->
+</head>
+<link rel="stylesheet" href="../common.css">
+<style>
+    img {
+        display: block;
+        width: 100%;
+    }
+
+    .box-blur {
+        width: 256px;
+        height: 192px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .radial-blur {
+        position: absolute;
+        filter: blur(20px);
+        mask-image: radial-gradient(transparent, transparent 10%, black 60%);
+        -webkit-mask-image: radial-gradient(transparent, transparent 10%, black 60%);
+        transform: scale(1.2);
+    }
+
+    .local-blur {
+        position: absolute;
+        filter: blur(12px);
+        mask: no-repeat center;
+        mask-image: linear-gradient(black, black), linear-gradient(black, black);
+        mask-size: cover, 60px 60px;
+        mask-composite: exclude;
+        mask-composite: source-out;
+        -webkit-mask: no-repeat center;
+        -webkit-mask-image: linear-gradient(black, black), linear-gradient(black, black);
+        -webkit-mask-size: cover, 60px 60px;
+        -webkit-mask-composite: exclude;
+        -webkit-mask-composite: source-out;
+        transform: scale(1.1);
+    }
+
+    .radial-blur,
+    .local-blur {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+    }
+</style>
+
+<body>
+    <div class="box-blur">
+        <img src="../img/jyj1.jpg" class="radial-blur">
+        <img src="../img/jyj1.jpg">
+    </div>
+
+    <p class="box-blur">
+        <img src="../img/jyj1.jpg" class="local-blur">
+        <img src="../img/jyj1.jpg">
+    </p>
+</body>
+
+</html>

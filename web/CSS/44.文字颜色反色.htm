@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 参考：https://www.zhangxinxu.com/study/201904/css-filter-blend/difference.php -->
+</head>
+<link rel="stylesheet" href="../common.css">
+<style>
+    body {
+        background: #000;
+    }
+
+    .box {
+        position: absolute;
+        overflow: hidden;
+        isolation: isolate;
+    }
+
+    h1 {
+        margin: 0;
+        mix-blend-mode: difference;
+        font-size: 300%;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+    }
+
+    .box::before {
+        content: '';
+        position: absolute;
+        width: 100vw;
+        height: 100vw;
+        left: calc(50% - 50vw);
+        top: calc(50% - 50vw);
+        margin: auto;
+        background: linear-gradient(#fff 50%, #000 50%);
+        animation: spin 5s linear infinite;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<body>
+    <div class="box">
+        <h1>苏苏就是小苏苏</h1>
+    </div>
+</body>
+
+</html>
